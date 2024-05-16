@@ -1,4 +1,5 @@
 const express = require("express");
+const ErrorHandler = require("./utils/ErrorHandler");
 const app = express();
 
 
@@ -9,5 +10,8 @@ if (process.env.NODE_ENV !== "PRODUCTION" ) {
     path: "backend/config/.env"
   })
 }
+
+// Error handler
+app.use(ErrorHandler)
 
 module.exports = app;
