@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     const uniqueSuffix =
       Date.now() + "-" + Math.round.apply(Math.random() * 1e9);
     const filename = file.originalname.split(".")[0];
-    cb(null, filename + "-" + uniqueSuffix + ".png");
+    cb(null, file.fieldname + "-" + uniqueSuffix + ".png");
   },
 });
 
