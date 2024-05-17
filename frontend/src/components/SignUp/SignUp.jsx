@@ -51,7 +51,6 @@ const SignUp = () => {
         password,
       })
       .then((res) => {
-        console.log(res)
         // toast.success(res.data.message);
         alert(res.data.message)
         setName("");

@@ -25,11 +25,7 @@ router.post("/create-user", async (req, res, next) => {
     email: email,
     password: password,
     phoneNumber: phoneNumber,
-    addresses: [
-      {
-        address1: address,
-      },
-    ],
+    addresses: address
   };
 
   const activationToken = createActivationToken(user);
@@ -61,9 +57,10 @@ const createActivationToken = (user) => {
 // Activate User
 router.post(
   "/activation",
-  catchAsyncError(async (req, res) => {
+  catchAsyncError(async (req, res, next) => {
     try {
       const { activation_token } = req.body;
+
       const newUser = jwt.verify(
         activation_token,
         process.env.ACTIVATION_SECRET
@@ -72,19 +69,37 @@ router.post(
       if (!newUser) {
         return next(new ErrorHandler("Invalid Token", 400));
       }
+      const { name, email, password, phoneNumber, addresses } = newUser;
 
-      const { name, email, password, phoneNumber, address } = newUser;
+      let user = await User.findOne({email});
+      if (user) {
+        return next(new ErrorHandler("User already exists!"), 400)
+      }
 
-      User.create({
-        name,
-        email,
-        password,
-        phoneNumber,
-        address,
-      });
+      try {
+        user = await User.create({
+          name: name,
+          email: email,
+          password: password,
+          phoneNumber: phoneNumber,
+          // addresses: addresses,
+        });
 
-      sendToken(newUser, 201, res)
-    } catch (error) {}
+        // Log user creation
+        console.log('User created:', user);
+
+        // Send token
+        sendToken(user, 201, res);
+      } catch (creationError) {
+        console.error('Error during user creation:', creationError);
+        return next(new ErrorHandler(creationError.message, 500));
+      }
+
+      // sendToken(user, 201, res); 
+
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
   })
 );
 

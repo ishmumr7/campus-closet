@@ -11,7 +11,7 @@ module.exports = (err, req, res, next) => {
   }
 
   // duplicate error
-  if (error.code === 11000) {
+  if (err.code === 11000) {
     const message = `Duplicate key ${Object.keys(err.keyValue)} entered`;
     err = new ErrorHandler(message, 400);
   }
