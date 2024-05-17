@@ -4,7 +4,10 @@ const User = require("./../model/user");
 const router = express.Router();
 const { upload } = require("../multer");
 const ErrorHandler = require("../utils/ErrorHandler");
+const catchAsyncError = require("../middleware/catchAsyncErrors");
 const jwt = require("jsonwebtoken");
+const sendMail = require("../utils/sendMail");
+const sendToken = require("../utils/jwtToken");
 
 router.post("/create-user", async (req, res, next) => {
   const { name, email, password, phoneNumber, address } = req.body;
@@ -34,9 +37,17 @@ router.post("/create-user", async (req, res, next) => {
   const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
   try {
-    
+    await sendMail({
+      email: user.email,
+      subject: "Activate Your Account - Campus Closet",
+      message: `Greetings ${user.name}, \nWelome to Campus Closet - UTM's Student Marketplace. Click on the link below to activate your account! \n${activationUrl}`,
+    });
+    res.status(201).json({
+      success: true,
+      message: `Please check your email (${user.email}) to activate your account.`,
+    });
   } catch (error) {
-    return next(new ErrorHandler(error.message, 400))
+    return next(new ErrorHandler(error.message, 400));
   }
 });
 
@@ -48,5 +59,33 @@ const createActivationToken = (user) => {
 };
 
 // Activate User
+router.post(
+  "/activation",
+  catchAsyncError(async (req, res) => {
+    try {
+      const { activation_token } = req.body;
+      const newUser = jwt.verify(
+        activation_token,
+        process.env.ACTIVATION_SECRET
+      );
+
+      if (!newUser) {
+        return next(new ErrorHandler("Invalid Token", 400));
+      }
+
+      const { name, email, password, phoneNumber, address } = newUser;
+
+      User.create({
+        name,
+        email,
+        password,
+        phoneNumber,
+        address,
+      });
+
+      sendToken(newUser, 201, res)
+    } catch (error) {}
+  })
+);
 
 module.exports = router;

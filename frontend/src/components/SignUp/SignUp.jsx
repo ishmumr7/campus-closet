@@ -21,8 +21,8 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    setAvatar(file);
+    // const file = e.target.files[0];
+    // setAvatar(file);
     // const reader = new FileReader();
 
     // reader.onload = () => {
@@ -51,18 +51,20 @@ const SignUp = () => {
         password,
       })
       .then((res) => {
+        console.log(res)
         // toast.success(res.data.message);
-        // setName("");
-        // setEmail("");
-        // setPassword("");
-        // setConfirmPassword("");
-        // setAddress("");
-        // setPhoneNumber("");
-        // setAvatar();
+        alert(res.data.message)
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setAddress("");
+        setPhoneNumber("");
+        setAvatar(null);
 
-        if(res.data.success) {
-          navigate("/");
-        }
+        // if(res.data.success) {
+        //   navigate("/");
+        // }
       })
       .catch((err) => {
         console.log(err);
