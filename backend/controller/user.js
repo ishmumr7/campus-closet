@@ -8,7 +8,9 @@ const catchAsyncError = require("../middleware/catchAsyncErrors");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
+// Sign Up
 router.post("/create-user", async (req, res, next) => {
   const { name, email, password, phoneNumber, address } = req.body;
   const userEmail = await User.findOne({ email });
@@ -100,6 +102,32 @@ router.post(
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
+  })
+);
+
+// Login
+router.post(
+  "/login-user",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        return next(new ErrorHandler("Please provide all fields", 400));
+      }
+
+      const user = await User.findOne({ email }).select("+password");
+      if (!user) {
+        return next(new ErrorHandler("User Doesnt Exist!", 400));
+      }
+
+      const isPasswordValid = await user.comparePassword(password);
+      if (!isPasswordValid) {
+        return next(new ErrorHandler("Incorrect Password!", 400));
+      }
+
+      sendToken(user, 201, res);
+    } catch (error) {}
   })
 );
 
