@@ -25,7 +25,11 @@ router.post("/create-user", async (req, res, next) => {
     email: email,
     password: password,
     phoneNumber: phoneNumber,
-    addresses: address
+    addresses: [
+      {
+        address1: address,
+      },
+    ],
   };
 
   const activationToken = createActivationToken(user);
@@ -71,32 +75,31 @@ router.post(
       }
       const { name, email, password, phoneNumber, addresses } = newUser;
 
-      let user = await User.findOne({email});
+      let user = await User.findOne({ email });
       if (user) {
-        return next(new ErrorHandler("User already exists!"), 400)
+        return next(new ErrorHandler("User already exists!"), 400);
       }
 
       try {
         user = await User.create({
-          name: name,
-          email: email,
-          password: password,
-          phoneNumber: phoneNumber,
-          // addresses: addresses,
+          name,
+          email,
+          password,
+          phoneNumber,
+          addresses,
         });
 
         // Log user creation
-        console.log('User created:', user);
+        console.log("User created:", user);
 
         // Send token
         sendToken(user, 201, res);
       } catch (creationError) {
-        console.error('Error during user creation:', creationError);
+        console.error("Error during user creation:", creationError);
         return next(new ErrorHandler(creationError.message, 500));
       }
 
-      // sendToken(user, 201, res); 
-
+      // sendToken(user, 201, res);
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
