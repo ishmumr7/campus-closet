@@ -89,9 +89,6 @@ router.post(
           addresses,
         });
 
-        // Log user creation
-        console.log("User created:", user);
-
         // Send token
         sendToken(user, 201, res);
       } catch (creationError) {

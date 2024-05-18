@@ -24,23 +24,16 @@ const SignUp = () => {
     // const file = e.target.files[0];
     // setAvatar(file);
     // const reader = new FileReader();
-
     // reader.onload = () => {
     //   if (reader.readyState === 2) {
     //     setAvatar(reader.result);
     //   }
     // };
-
     // reader.readAsDataURL(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
 
     axios
       .post(`${server}/user/create-user`, {
@@ -51,8 +44,7 @@ const SignUp = () => {
         password,
       })
       .then((res) => {
-        // toast.success(res.data.message);
-        alert(res.data.message)
+        toast.success(res.data.message);
         setName("");
         setEmail("");
         setPassword("");
@@ -66,7 +58,7 @@ const SignUp = () => {
         // }
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.response.data.message);
       });
   };
 
