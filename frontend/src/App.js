@@ -1,12 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Bounce, ToastContainer } from "react-toastify";
 import { LoginPage, SignUpPage, ActivationPage } from "./Routes";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
-import axios from "axios";
-import { server } from "./server";
 import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
 
