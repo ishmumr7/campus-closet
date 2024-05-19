@@ -5,7 +5,7 @@ import { categoriesData, productData } from "../../static/data";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
-import { DropDown } from "./DropDown"
+import DropDown from "./DropDown";
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
