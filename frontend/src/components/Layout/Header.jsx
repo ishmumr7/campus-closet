@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { categoriesData, productData } from "../../static/data";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
 import Navbar from "./Navbar";
@@ -128,8 +129,29 @@ const Header = ({ activeHeading }) => {
           </div>
 
           {/* NAV ITEMS */}
-          <div>
+          <div className={`${styles.noramlFlex}`}>
             <Navbar active={activeHeading} />
+          </div>
+
+          <div className="flex">
+            {/* Wishlist */}
+            <div className={`${styles.noramlFlex}`}>
+              <div className="relative cursor-pointer mr-[15px] ">
+                <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
+                <div className=" absolute right-0 top-0 rounded-full bg-[#FFD700] w-4 h-4 top right p-0 m-0 text-black font-mono text-[12px] leading-tight text-center">
+                  0
+                </div>
+              </div>
+            </div>
+
+            {/* Profile */}
+            <div className={`${styles.noramlFlex}`}>
+              <div className="relative cursor-pointer mr-[15px] ">
+                <Link to="/login">
+                  <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
