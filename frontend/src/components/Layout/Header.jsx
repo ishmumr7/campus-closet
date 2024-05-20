@@ -6,8 +6,9 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
+import Navbar from "./Navbar";
 
-const Header = () => {
+const Header = ({ activeHeading }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
 
@@ -91,6 +92,8 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      {/* NAVBAR */}
       <div
         className={`${
           active ? "shadow-sm fixed top-0 left-0 z-10" : null
@@ -122,6 +125,11 @@ const Header = () => {
                 />
               ) : null}
             </div>
+          </div>
+
+          {/* NAV ITEMS */}
+          <div>
+            <Navbar active={activeHeading} />
           </div>
         </div>
       </div>
