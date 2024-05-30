@@ -105,7 +105,12 @@ const Header = ({ activeHeading }) => {
         >
           {/* Categories */}
           <div>
-            <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
+            <div
+              className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block"
+              onClick={() => {
+                setDropDown(!dropDown);
+              }}
+            >
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
               <button
                 className={`h-[100%] w-full flex items-center justify-between pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
@@ -115,9 +120,6 @@ const Header = ({ activeHeading }) => {
               <IoIosArrowDown
                 size={20}
                 className=" absolute right-2 top-4 cursor-pointer"
-                onClick={() => {
-                  setDropDown(!dropDown);
-                }}
               />
               {dropDown ? (
                 <DropDown
