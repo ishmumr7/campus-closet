@@ -1,7 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Bounce, ToastContainer } from "react-toastify";
-import { LoginPage, SignUpPage, ActivationPage, HomePage } from "./Routes";
+import {
+  LoginPage,
+  SignUpPage,
+  ActivationPage,
+  HomePage,
+  ProductPage,
+} from "./Routes";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
@@ -17,13 +23,14 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/sign-up" element={<SignUpPage />}></Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
           <Route
             path="/activation/:activation_token"
             element={<ActivationPage />}
-          ></Route>
+          />
+          <Route path="/products" element={<ProductPage />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer
