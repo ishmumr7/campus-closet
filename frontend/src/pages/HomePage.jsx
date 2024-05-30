@@ -5,7 +5,8 @@ import Categories from "./../components/Home/Categories/Categories";
 import BestDeals from "./../components/Home/BestDeals/BestDeals";
 import FeaturedProuct from "./../components/Home/FeaturedProuct/FeaturedProuct";
 import Events from "./../components/Home/Events/Events";
-import Sponsor from "./../components/Home/Sponsor/Sponsor.jsx";
+import Sponsor from "./../components/Home/Sponsor/Sponsor";
+import Footer from "../components/Layout/Footer/Footer.jsx";
 
 const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
       <Events />
       <FeaturedProuct />
       <Sponsor />
+      <Footer />
     </div>
   );
 };
