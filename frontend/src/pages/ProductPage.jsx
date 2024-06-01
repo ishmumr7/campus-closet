@@ -17,8 +17,9 @@ const ProductPage = () => {
       setData(d);
     } else {
       const d =
-        productData && productData.filter((i) => i.category === categoryData);
-      setData(d);
+        productData; 
+      const filtered = d.filter((i) => i.category === categoryData);
+      setData(filtered);
     }
   }, []);
 
