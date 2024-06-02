@@ -17,7 +17,7 @@ const FAQ = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const toggleTab = (tab) => {
-    if (activeTab == tab) {
+    if (activeTab === tab) {
       setActiveTab(0);
     } else {
       setActiveTab(tab);
