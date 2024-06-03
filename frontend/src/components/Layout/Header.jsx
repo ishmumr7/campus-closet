@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { categoriesData, productData } from "../../static/data";
 import { AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
@@ -10,6 +11,8 @@ import DropDown from "./DropDown";
 import Navbar from "./Navbar";
 
 const Header = ({ activeHeading }) => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
 
@@ -149,9 +152,15 @@ const Header = ({ activeHeading }) => {
             {/* Profile */}
             <div className={`${styles.noramlFlex}`}>
               <div className="relative cursor-pointer mr-[15px] ">
-                <Link to="/login">
-                  <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
-                </Link>
+                {isAuthenticated ? (
+                  <Link to="/profile">
+                    <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
