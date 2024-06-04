@@ -77,7 +77,7 @@ const CartItem = ({ data }) => {
           <h1>{data.name}</h1>
           <h4 className=" font-[400] text-[17px] text-[#d02222] font-Roboto ">RM {totalPrice}</h4>
         </div>
-        <MdDeleteOutline size={25} color="#d02222" className=" cursor-pointer "/>
+        <MdDeleteOutline size={25} color="#d02222" className=" cursor-pointer pl-1"/>
       </div>
     </div>
   );

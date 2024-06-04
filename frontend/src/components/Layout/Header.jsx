@@ -13,8 +13,8 @@ import { CgProfile } from "react-icons/cg";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
 import Navbar from "./Navbar";
-import Cart from '../cart/Cart.jsx';
-import Wishlist from '../Wishlist/Wishlist.jsx';
+import Cart from '../cart/Cart';
+import Wishlist from '../Wishlist/Wishlist';
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
