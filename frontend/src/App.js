@@ -7,6 +7,7 @@ import {
   ActivationPage,
   HomePage,
   ProductPage,
+  ProductDetailsPage,
   BestSellingPage,
   EventsPage,
   FAQPage,
@@ -39,6 +40,7 @@ const App = () => {
                 element={<ActivationPage />}
               />
               <Route path="/products" element={<ProductPage />} />
+              <Route path="/products/:id" element={<ProductDetailsPage />} />
               <Route path="/best-selling" element={<BestSellingPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/faq" element={<FAQPage />} />
