@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { productData } from "../../static/data";
 import { RxCross1 } from "react-icons/rx";
 import styles from "../../styles/styles";
-import { IoBagHandleOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs"
 import { AiOutlineHeart } from "react-icons/ai";
 
