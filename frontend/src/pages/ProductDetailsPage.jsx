@@ -8,7 +8,7 @@ import { productData } from '../static/data';
 const ProductDetailsPage = () => {
   const name = useParams();
   const [data, setData] = useState(null);
-  const productName = name.replace(/-/g," ");
+  const productName = name.id.replace(/-/g," ");
 
   useEffect(() => {
     const data = productData.find((i) => i.name === productName);
