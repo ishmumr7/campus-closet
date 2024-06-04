@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { productData } from "../../static/data";
 import { RxCross1 } from "react-icons/rx";
 import { IoBagHandleOutline } from "react-icons/io5";
-import { HiMinus, HiOutlineMinus, HiPlus } from "react-icons/hi";
+import { HiOutlineMinus, HiPlus } from "react-icons/hi";
 import { MdDeleteOutline } from "react-icons/md";
 import styles from "../../styles/styles";
 
