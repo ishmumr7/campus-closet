@@ -3,12 +3,18 @@ import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { categoriesData, productData } from "../../static/data";
-import { AiOutlineHeart, AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiOutlineSearch,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
 import Navbar from "./Navbar";
+import Cart from '../cart/Cart.jsx';
+import Wishlist from '../Wishlist/Wishlist.jsx';
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -19,6 +25,12 @@ const Header = ({ activeHeading }) => {
   // Navbar states
   const [active, setActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
+
+  // Cart state
+  const [openCart, setOpenCart] = useState(false);
+
+  // Wishlist state
+  const [openWishlist, setOpenWishlist] = useState(false);
 
   const handleSearch = (e) => {
     const term = e.target.value;
@@ -141,13 +153,40 @@ const Header = ({ activeHeading }) => {
           <div className="flex">
             {/* Wishlist */}
             <div className={`${styles.noramlFlex}`}>
-              <div className="relative cursor-pointer mr-[15px] ">
+              <div
+                className="relative cursor-pointer mr-[15px] "
+                onClick={() => setOpenWishlist(true)}
+              >
                 <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
                 <div className=" absolute right-0 top-0 rounded-full bg-[#FFD700] w-4 h-4 top right p-0 m-0 text-black font-mono text-[12px] leading-tight text-center">
                   0
                 </div>
               </div>
             </div>
+
+            {/* Wishlist popup */}
+            {openWishlist ? (
+              <Wishlist setOpenWishlist={setOpenWishlist} />
+            ) : null}
+
+            {/* Cart */}
+            <div className={`${styles.noramlFlex}`}>
+              <div
+                className="relative cursor-pointer mr-[15px]"
+                onClick={() => setOpenCart(true)}
+              >
+                <AiOutlineShoppingCart
+                  size={30}
+                  color="rgb(255 255 255 / 83%)"
+                />
+                <span className="absolute right-0 top-0 rounded-full bg-[#FFD700] w-4 h-4 top right p-0 m-0 text-black font-mono text-[12px] leading-tight text-center">
+                  {/* {cart && cart.length} */}0
+                </span>
+              </div>
+            </div>
+
+            {/* Cart popup */}
+            {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
 
             {/* Profile */}
             <div className={`${styles.noramlFlex}`}>
