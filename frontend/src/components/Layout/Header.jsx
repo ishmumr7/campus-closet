@@ -58,7 +58,7 @@ const Header = ({ activeHeading }) => {
             <Link to="/">
               <img
                 style={{ height: "120px", width: "120px" }}
-                src="Logo.png"
+                src='Logo.png'
                 alt="Campus Closet"
               />
             </Link>
