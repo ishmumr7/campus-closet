@@ -7,10 +7,23 @@ import { TbAddressBook } from "react-icons/tb";
 import { RxPerson } from "react-icons/rx";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import {server} from './../../server';
+import { toast } from "react-toastify";
 
 const ProfileSideBar = ({ setActive, active }) => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
+
+  const logoutHandler = () => {
+    axios.get(`${server}/user/logout`, { withCredentials: true }).then((res) => {
+      toast.success(res.data.message);
+      window.location.reload();
+      navigate("/");
+    }).catch((error) => {
+      console.log(error.response.data.message)
+    })
+  }
 
   return (
     <div className="w-full bg-white shadow-sm rounded-[10px] p-4 pt-8">
@@ -114,7 +127,7 @@ const ProfileSideBar = ({ setActive, active }) => {
 
       <div
         className="single_item flex items-center cursor-pointer w-full mb-8"
-        // onClick={logoutHandler}
+        onClick={logoutHandler}
       >
         <AiOutlineLogin size={20} color={active === 8 ? "red" : ""} />
         <span
