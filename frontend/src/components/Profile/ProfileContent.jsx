@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { AiOutlineArrowRight, AiOutlineCamera, AiOutlineDelete } from "react-icons/ai";
+import {
+  AiOutlineArrowRight,
+  AiOutlineCamera,
+  AiOutlineDelete,
+} from "react-icons/ai";
 import { useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
@@ -167,6 +171,13 @@ const ProfileContent = ({ active }) => {
       {active === 6 && (
         <div>
           <PaymentMethod />
+        </div>
+      )}
+
+      {/* ADDRESS */}
+      {active === 7 && (
+        <div>
+          <Address />
         </div>
       )}
     </div>
@@ -461,8 +472,38 @@ const PaymentMethod = () => {
           <h5 className=" pl-6 ">08/26</h5>
         </div>
         <div className="min-w-[10%] flex items-center justify-between pl-8">
-          <AiOutlineDelete size={25} className=" cursor-pointer "/>
-        </div> 
+          <AiOutlineDelete size={25} className=" cursor-pointer " />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Address = () => {
+  return (
+    <div className="w-full px-5">
+      <div className="flex w-full items-center justify-between">
+        <h1 className="text-[25px] font-[600] text-[#000000ba] pb-2 ">
+          My Addresses
+        </h1>
+        <div className={`${styles.button} !rounded-md !h-10`}>
+          <span className="text-white">Add New</span>
+        </div>
+      </div>
+      <br />
+      <div className="w-full bg-white h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10">
+        <div className="flex items-center">
+          <h5 className=" pl-5 font-[600]">Default Address</h5>
+        </div>
+        <div className="pl-8 flex items-center">
+          <h6>Kolej Tun Ghaffar Baba, UTM</h6>
+        </div>
+        <div className="pl-8 flex items-center">
+          <h6>0146830582</h6>
+        </div>
+        <div className="min-w-[10%] flex items-center justify-between pl-8">
+          <AiOutlineDelete size={25} className=" cursor-pointer " />
+        </div>
       </div>
     </div>
   );
