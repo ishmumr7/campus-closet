@@ -12,7 +12,7 @@ import {
   EventsPage,
   FAQPage,
   ProfilePage,
-} from "./Routes";
+} from "./routes/Routes.js";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
