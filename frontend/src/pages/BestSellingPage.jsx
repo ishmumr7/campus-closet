@@ -10,10 +10,9 @@ const BestSellingPage = () => {
   const [bestData, setBestData] = useState([]);
 
   useEffect(() => {
-    const d = productData;
+    const d = productData && productData.sort((a, b) => b.total_sell - a.total_sell);
     setBestData(d);
   }, []);
-  bestData.sort((a, b) => b.total_sell - a.total_sell);
   
   return (
     <div>
