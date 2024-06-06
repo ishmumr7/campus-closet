@@ -271,7 +271,7 @@ export const productData = [
     image_Url: [
       {
         public_id: "test",
-        url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
+        url: "https://www.machines.com.my/cdn/shop/products/MacBook_Pro_13-inch_Space_Gray_PDP_Image_Position-1__SGMY_8bbf835f-534d-41ba-a219-0c298ce5077d_823x.jpg?v=1705423857",
       },
       {
         public_id: "test",
@@ -331,7 +331,7 @@ export const productData = [
     image_Url: [
       {
         public_id: "test",
-        url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
+        url: "https://www.machines.com.my/cdn/shop/products/MacBook_Pro_13-inch_Space_Gray_PDP_Image_Position-1__SGMY_8bbf835f-534d-41ba-a219-0c298ce5077d_823x.jpg?v=1705423857",
       },
       {
         public_id: "test",
@@ -393,7 +393,7 @@ export const productData = [
     image_Url: [
       {
         public_id: "test",
-        url: "https://mirzacdns3.s3.ap-south-1.amazonaws.com/cache/catalog/RLV0015/2-800x800.jpg",
+        url: "https://cdn.allbirds.com/image/fetch/q_auto,f_auto/w_1066,f_auto,q_auto/https://www.allbirds.com/cdn/shop/products/TR3MMST080_SHOE_ANGLE_GLOBAL_MENS_TREE_RUNNER_MIST_WHITE_5efe1844-c5a1-4d70-8e2b-b68ce3a4ef4c.png?v=1707178383",
       },
       {
         public_id: "test",
