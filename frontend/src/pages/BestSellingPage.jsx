@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Layout/Header'
-import Footer from '../components/Layout/Footer/Footer'
+import Footer from '../components/Footer/Footer'
 import { useSearchParams } from 'react-router-dom';
 import { productData } from '../static/data';
 import styles from '../styles/styles';
