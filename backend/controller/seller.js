@@ -5,7 +5,6 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const { isAuthenticated, isSeller, isAdmin } = require("../middleware/auth");
-const cloudinary = require("cloudinary");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendToken = require("../utils/jwtToken");
