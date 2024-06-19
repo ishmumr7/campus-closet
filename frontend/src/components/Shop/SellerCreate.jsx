@@ -6,11 +6,13 @@ import { toast } from 'react-toastify';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import styles from '../../styles/styles';
 import { RxAvatar } from 'react-icons/rx';
+import { useSelector } from "react-redux";
 
 const SellerCreate = () => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState();
+  const { user } = useSelector((state) => state.user);
+  const [email, setEmail] = useState(user && user.email);
+  const [name, setName] = useState(user && user.name);
+  const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
   const [address, setAddress] = useState("");
   const [zipCode, setZipCode] = useState();
   const [avatar, setAvatar] = useState();
@@ -19,6 +21,32 @@ const SellerCreate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    axios
+      .post(`${server}/seller/create-seller`, {
+        name,
+        email,
+        phoneNumber,
+        address,
+        password,
+        zipCode
+      })
+      .then((res) => {
+        toast.success(res.data.message);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setAddress("");
+        setPhoneNumber("");
+        setZipCode("");
+        setAvatar(null);
+
+        // if(res.data.success) {
+        //   navigate("/");
+        // }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   };
 
   const handleFileInputChange = () => {
@@ -40,7 +68,7 @@ const SellerCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Shop Name
+                Name
               </label>
               <div className="mt-1">
                 <input
