@@ -14,6 +14,7 @@ import {
   CheckoutPage,
   ProfilePage,
   SellerCreatePage,
+  SellerActivationPage
 } from "./routes/Routes.js";
 import ProtectedRoute from "./routes/ProtectedRoutes.js";
 import "./App.css";
@@ -58,11 +59,17 @@ const App = () => {
                   <ProfilePage />
                 </ProtectedRoute>
               } />
+
+              {/* SELLER */}
               <Route path="/seller-create" element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
                   <SellerCreatePage />
                 </ProtectedRoute>
               } />
+              <Route
+                path="/seller/activation/:activation_token"
+                element={<SellerActivationPage />}
+              />
             </Routes>
           </BrowserRouter>
           <ToastContainer
