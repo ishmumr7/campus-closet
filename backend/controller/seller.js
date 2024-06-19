@@ -81,17 +81,21 @@ router.post(
         return next(new ErrorHandler("User already exists", 400));
       }
 
-      seller = await Seller.create({
-        name,
-        email,
-        avatar,
-        password,
-        zipCode,
-        address,
-        phoneNumber,
-      });
-
-      sendToken(seller, 201, res);
+      try {
+        seller = await Seller.create({
+          name,
+          email,
+          avatar,
+          password,
+          zipCode,
+          address,
+          phoneNumber,
+        });
+        sendToken(seller, 201, res);
+      } catch (creationError) {
+        console.error("Error during user creation:", creationError);
+        return next(new ErrorHandler(creationError.message, 500));
+      }
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
