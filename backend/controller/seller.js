@@ -12,7 +12,7 @@ const sendToken = require("../utils/jwtToken");
 
 // create shop
 router.post(
-  "/create-shop",
+  "/create-seller",
   catchAsyncErrors(async (req, res, next) => {
     try {
       const { email } = req.body;
