@@ -14,7 +14,6 @@ import {
   CheckoutPage,
   ProfilePage,
   SellerCreatePage,
-  SellerActivationPage
 } from "./routes/Routes.js";
 import ProtectedRoute from "./routes/ProtectedRoutes.js";
 import "./App.css";
@@ -49,26 +48,30 @@ const App = () => {
               <Route path="/best-selling" element={<BestSellingPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/faq" element={<FAQPage />} />
-              <Route path="/checkout" element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <CheckoutPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/profile" element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <ProfilePage />
-                </ProtectedRoute>
-              } />
-
-              {/* SELLER */}
-              <Route path="/seller-create" element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <SellerCreatePage />
-                </ProtectedRoute>
-              } />
               <Route
-                path="/seller/activation/:activation_token"
-                element={<SellerActivationPage />}
+                path="/checkout"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <CheckoutPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <ProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+              {/* SELLER */}
+              <Route
+                path="/seller-create"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <SellerCreatePage />
+                  </ProtectedRoute>
+                }
               />
             </Routes>
           </BrowserRouter>
