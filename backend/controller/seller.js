@@ -8,7 +8,6 @@ const { isAuthenticated, isSeller, isAdmin } = require("../middleware/auth");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendToken = require("../utils/jwtToken");
-const sendSellerToken = require("../utils/shopToken");
 
 // create shop
 router.post(
