@@ -1,26 +1,41 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
+  loading: true,
   isAuthenticated: false,
+  isSeller: false,
+  user: null,
+  error: null,
 };
 
 export const userReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase('LoadUserRequest', (state) => {
+    .addCase("LoadUserRequest", (state) => {
       state.loading = true;
     })
-    .addCase('LoadUserSuccess', (state, action) => {
-      state.isAuthenticated = true;
-      state.loading = false;
-      state.user = action.payload;
+    .addCase("LoadUserSuccess", (state, action) => {
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: action.payload,
+        isSeller: action.payload.role === "seller",
+      };
     })
-    .addCase('LoadUserFail', (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-      state.isAuthenticated = false;
+    .addCase("LoadUserFail", (state, action) => {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        isAuthenticated: false,
+        isSeller: false,
+      };
     })
-    .addCase('clearErrors', (state) => {
-      state.error = null;
+    .addCase("clearErrors", (state) => {
+      return {
+        ...state,
+        error: null,
+      };
     });
 });
 
