@@ -16,3 +16,12 @@ exports.isAuthenticated = catchAsyncErrors(async(req, res, next) => {
 
   next();
 })
+
+exports.isSeller = catchAsyncErrors(async(req, res, next) => {
+  return (req, res, next) => {
+    if (req.user.role !== 'seller') {
+      return next(new ErrorHandler(`Role ${role} is required to access this resource`, 403));
+    }
+    next();
+  };
+});
