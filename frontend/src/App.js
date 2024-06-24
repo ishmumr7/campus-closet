@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer } from "react-toastify";
 import {
   LoginPage,
@@ -15,16 +15,20 @@ import {
   ProfilePage,
   SellerCreatePage,
 } from "./routes/Routes.js";
-import ProtectedRoute from "./routes/ProtectedRoutes.js";
+import {SellerHomePage} from "./routes/SellerRoutes.js"
+import ProtectedRoute from "./routes/ProtectedRoutes";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
 import { useSelector } from "react-redux";
+import SellerProtectedRoute from "./routes/SellerProtectedRoute.js";
 
 const App = () => {
-  const { loading, isAuthenticated } = useSelector((state) => state.user);
+  const { loading, isAuthenticated, isSeller, user } = useSelector(
+    (state) => state.user
+  );
 
   useEffect(() => {
     Store.dispatch(loadUser());
@@ -71,6 +75,14 @@ const App = () => {
                   <ProtectedRoute isAuthenticated={isAuthenticated}>
                     <SellerCreatePage />
                   </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/seller/:id"
+                element={
+                  <SellerProtectedRoute isSeller={isSeller} >
+                    <SellerHomePage />
+                  </SellerProtectedRoute>
                 }
               />
             </Routes>
