@@ -1,5 +1,5 @@
 import React from 'react';
-import SellerCreate from './../components/Shop/SellerCreate';
+import SellerCreate from '../components/Seller/SellerCreate';
 
 const SellerCreatePage = () => {
   return (
