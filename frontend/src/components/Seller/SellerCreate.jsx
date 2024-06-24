@@ -10,13 +10,13 @@ import { useSelector } from "react-redux";
 
 const SellerCreate = () => {
   const { user } = useSelector((state) => state.user);
-  const [email, setEmail] = useState(user && user.email);
-  const [name, setName] = useState(user && user.name);
-  const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
+  const [email, setEmail] = useState(user ? user && user.email : "");
+  const [name, setName] = useState(user ? user && user.name : "");
+  const [phoneNumber, setPhoneNumber] = useState(user ? user && user.phoneNumber : "");
   const [address, setAddress] = useState("");
   const [zipCode, setZipCode] = useState();
   const [avatar, setAvatar] = useState();
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -27,14 +27,13 @@ const SellerCreate = () => {
         email,
         phoneNumber,
         address,
-        password,
         zipCode
       })
       .then((res) => {
         toast.success(res.data.message);
         setName("");
         setEmail("");
-        setPassword("");
+        // setPassword("");
         setAddress("");
         setPhoneNumber("");
         setZipCode("");
@@ -46,6 +45,7 @@ const SellerCreate = () => {
       })
       .catch((err) => {
         toast.error(err.response.data.message);
+        console.log(err);
       });
   };
 
@@ -75,6 +75,7 @@ const SellerCreate = () => {
                   type="name"
                   name="name"
                   required
+                  readOnly
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -114,6 +115,7 @@ const SellerCreate = () => {
                   name="email"
                   autoComplete="email"
                   required
+                  readOnly
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -161,39 +163,6 @@ const SellerCreate = () => {
 
             <div>
               <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <div className="mt-1 relative">
-                <input
-                  type={visible ? "text" : "password"}
-                  name="password"
-                  autoComplete="current-password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                />
-                {visible ? (
-                  <AiOutlineEye
-                    className="absolute right-2 top-2 cursor-pointer"
-                    size={25}
-                    onClick={() => setVisible(false)}
-                  />
-                ) : (
-                  <AiOutlineEyeInvisible
-                    className="absolute right-2 top-2 cursor-pointer"
-                    size={25}
-                    onClick={() => setVisible(true)}
-                  />
-                )}
-              </div>
-            </div>
-
-            <div>
-              <label
                 htmlFor="avatar"
                 className="block text-sm font-medium text-gray-700"
               ></label>
@@ -233,12 +202,12 @@ const SellerCreate = () => {
                 Submit
               </button>
             </div>
-            <div className={`${styles.noramlFlex} w-full`}>
+            {/* <div className={`${styles.noramlFlex} w-full`}>
               <h4>Already have an account?</h4>
-              <Link to="/seller-login" className="text-blue-600 pl-2">
+              <Link to="/login" className="text-blue-600 pl-2">
                 Sign in
               </Link>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
