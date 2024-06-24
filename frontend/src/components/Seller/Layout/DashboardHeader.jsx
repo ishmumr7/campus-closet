@@ -3,7 +3,7 @@ import { AiOutlineGift } from "react-icons/ai";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineLocalOffer } from "react-icons/md";
-import { FiPackage, FiShoppingBag } from 'react-icons/fi';
+import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -54,7 +54,11 @@ const DashboardHeader = () => {
             />
           </Link>
           <Link to={`/seller/${user._id}`}>
-            <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+            <CgProfile
+              className="mx-5 cursor-pointer"
+              size={30}
+              color="#555"
+            />
           </Link>
         </div>
       </div>
