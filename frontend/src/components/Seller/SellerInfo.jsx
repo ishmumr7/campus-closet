@@ -1,13 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
+import axios from "axios";
+import { server } from "../../server";
+import { toast } from "react-toastify"
 
 const SellerInfo = ({ isOwner }) => {
   const { loading, user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const logoutHandler = () => {
-    
+    axios.get(`${server}/user/logout`, { withCredentials: true }).then((res) => {
+      window.location.reload();
+      navigate("/");
+      toast.success(res.data.message);
+    }).catch((error) => {
+      console.log(error.response.data.message)
+    })
   }
 
   return (
