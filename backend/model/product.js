@@ -62,11 +62,11 @@ const productSchema = new mongoose.Schema({
   ratings: {
     type: Number,
   },
-  shopId: {
+  sellerId: {
     type: String,
     required: true,
   },
-  shop: {
+  seller: {
     type: Object,
     required: true,
   },
