@@ -10,7 +10,7 @@ export const productReducer = createReducer(initialState, (builder) => {
       return {
         ...state,
         isLoading: true,
-      }
+      };
     })
     .addCase("productCreateSuccess", (state, action) => {
       return {
@@ -33,7 +33,7 @@ export const productReducer = createReducer(initialState, (builder) => {
       return {
         ...state,
         isLoading: true,
-      }
+      };
     })
     .addCase("getAllProductsSellerSuccess", (state, action) => {
       return {
@@ -41,7 +41,7 @@ export const productReducer = createReducer(initialState, (builder) => {
         isLoading: false,
         products: action.payload,
         success: true,
-      }
+      };
     })
     .addCase("getAllProductsSellerFail", (state, action) => {
       return {
@@ -49,7 +49,29 @@ export const productReducer = createReducer(initialState, (builder) => {
         isLoading: false,
         error: action.payload,
         success: false,
-      }
+      };
+    })
+
+    // Delete product seller
+    .addCase("deleteProductRequest", (state) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    })
+    .addCase("deleteProductSuccess", (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        message: action.payload,
+      };
+    })
+    .addCase("deleteProductFail", (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
     })
 
     // Clear errors
@@ -57,6 +79,6 @@ export const productReducer = createReducer(initialState, (builder) => {
       return {
         ...state,
         error: null,
-      }
+      };
     });
 });

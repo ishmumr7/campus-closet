@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProductsSeller } from "../../redux/actions/product";
+import { deleteProduct, getAllProductsSeller } from "../../redux/actions/product";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
@@ -16,7 +16,10 @@ const SellerProducts = () => {
     dispatch(getAllProductsSeller(user._id));
   }, [dispatch]);
 
-  const handleDelete = () => {};
+  const handleDelete = (id) => {
+    dispatch(deleteProduct(id));
+    window.location.reload();
+  };
 
   const columns = [
     { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.7 },

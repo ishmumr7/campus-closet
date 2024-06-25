@@ -27,21 +27,49 @@ export const createProduct = (newForm) => async (dispatch) => {
 };
 
 //Get all products seller
-export const getAllProductsSeller = (id) => async(dispatch) => {
+export const getAllProductsSeller = (id) => async (dispatch) => {
   try {
     dispatch({
       type: "getAllProductsSellerRequest",
     });
 
-    const { data} = await axios.get(`${server}/product/get-all-products-seller/${id}`);
+    const { data } = await axios.get(
+      `${server}/product/get-all-products-seller/${id}`
+    );
     dispatch({
       type: "getAllProductsSellerSuccess",
-      payload: data.products
-    })
+      payload: data.products,
+    });
   } catch (error) {
     dispatch({
       type: "getAllProductsSellerFail",
       payload: error.response.data.message,
     });
   }
-}
+};
+
+// Delete product
+export const deleteProduct = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "deleteProductRequest",
+    });
+
+    const { data } = await axios.delete(
+      `${server}/product/delete-seller-product/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch({
+      type: "deleteProductSuccess",
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: "deleteProductFail",
+      payload: error.response.data.message,
+    });
+  }
+};
