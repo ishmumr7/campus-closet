@@ -15,7 +15,7 @@ import {
   ProfilePage,
   SellerCreatePage,
 } from "./routes/Routes.js";
-import { SellerHomePage, SellerDashboardPage } from "./routes/SellerRoutes.js";
+import { SellerHomePage, SellerDashboardPage, SellerCreateProductPage } from "./routes/SellerRoutes.js";
 import ProtectedRoute from "./routes/ProtectedRoute.js";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -82,6 +82,14 @@ const App = () => {
           element={
             <SellerProtectedRoute>
               <SellerDashboardPage />
+            </SellerProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard-create-product"
+          element={
+            <SellerProtectedRoute>
+              <SellerCreateProductPage />
             </SellerProtectedRoute>
           }
         />
