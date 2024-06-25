@@ -25,3 +25,23 @@ export const createProduct = (newForm) => async (dispatch) => {
     });
   }
 };
+
+//Get all products seller
+export const getAllProductsSeller = (id) => async(dispatch) => {
+  try {
+    dispatch({
+      type: "getAllProductsSellerRequest",
+    });
+
+    const { data} = await axios.get(`${server}/product/get-all-products-seller/${id}`);
+    dispatch({
+      type: "getAllProductsSellerSuccess",
+      payload: data.products
+    })
+  } catch (error) {
+    dispatch({
+      type: "getAllProductsSellerFail",
+      payload: error.response.data.message,
+    });
+  }
+}
