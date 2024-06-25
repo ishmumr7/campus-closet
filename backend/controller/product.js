@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { upload } = require("../multer");
 const Product = require("../model/product");
-const Shop = require("../model/user")
+const User = require("../model/user");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 
@@ -15,11 +15,11 @@ router.post(
       const sellerId = req.body.sellerId;
       const seller = await User.findById(sellerId);
 
-      if(!seller) {
+      if (!seller) {
         return next(new ErrorHandler("Invalid Seller Id!", 400));
       } else {
         const files = req.files;
-        const imageUrls = files.map((file) => `${file.fileName}`);
+        const imageUrls = files.map((file) => `${file.filename}`);
         const productData = req.body;
         productData.images = imageUrls;
         productData.seller = seller;
@@ -29,9 +29,8 @@ router.post(
         res.status(200).json({
           success: true,
           product,
-        })
+        });
       }
-
     } catch (error) {
       return next(new ErrorHandler(error, 400));
     }
