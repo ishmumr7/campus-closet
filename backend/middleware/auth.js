@@ -17,11 +17,14 @@ exports.isAuthenticated = catchAsyncErrors(async(req, res, next) => {
   next();
 })
 
-exports.isSeller = catchAsyncErrors(async(req, res, next) => {
-  return (req, res, next) => {
-    if (req.user.role !== 'seller') {
-      return next(new ErrorHandler(`Role ${role} is required to access this resource`, 403));
-    }
-    next();
-  };
+exports.isSeller = catchAsyncErrors(async (req, res, next) => {
+  const {token} = req.cookies;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+  req.user = await User.findById(decoded.id);
+
+  if (req.user.role !== 'seller') {
+    return next(new ErrorHandler(`Role 'seller' is required to access this resource`, 403));
+  }
+
+  next();
 });
