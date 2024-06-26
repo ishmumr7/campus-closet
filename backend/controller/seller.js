@@ -25,120 +25,17 @@ router.post(
         return next(new ErrorHandler(err.message, 400));
       }
 
-      // const user = {
-      //   name: name,
-      //   email: email,
-      //   password: password,
-      //   address: address,
-      //   phoneNumber: phoneNumber,
-      //   zipCode: zipCode,
-      //   role: "seller"
-      // };
+      res.status(200).json({
+        success: true,
+        message: "Successfully registered as seller!",
+      });
 
-      // const activationToken = createActivationToken(seller);
-      // const activationUrl = `http://localhost:3000/seller/activation/${activationToken}`;
-      // try {
-      //   await sendMail({
-      //     email: seller.email,
-      //     subject: "Activate Your Seller Account",
-      //     message: `Hello ${seller.name}, please click on the link to activate your seller account: ${activationUrl}`,
-      //   });
-      //   res.status(201).json({
-      //     success: true,
-      //     message: `Please check your email:- ${seller.email} to activate your seller account!`,
-      //   });
-      // } catch (error) {
-      //   return next(new ErrorHandler(error.message, 500));
-      // }
+      
     } catch (error) {
       return next(new ErrorHandler(error.message, 400));
     }
   })
 );
-
-// create activation token
-// const createActivationToken = (seller) => {
-//   return jwt.sign(seller, process.env.ACTIVATION_SECRET, {
-//     expiresIn: "5m",
-//   });
-// };
-
-// activate user
-// router.post(
-//   "/activation",
-//   catchAsyncErrors(async (req, res, next) => {
-//     try {
-//       const { activation_token } = req.body;
-
-//       const newSeller = jwt.verify(
-//         activation_token,
-//         process.env.ACTIVATION_SECRET
-//       );
-
-//       if (!newSeller) {
-//         return next(new ErrorHandler("Invalid token", 400));
-//       }
-//       const { name, email, password, avatar, zipCode, address, phoneNumber } =
-//         newSeller;
-
-//       let seller = await Seller.findOne({ email });
-
-//       if (seller) {
-//         return next(new ErrorHandler("User already exists", 400));
-//       }
-
-//       try {
-//         seller = await Seller.create({
-//           name,
-//           email,
-//           avatar,
-//           password,
-//           zipCode,
-//           address,
-//           phoneNumber,
-//         });
-//         sendSellerToken(seller, 201, res);
-//       } catch (creationError) {
-//         console.error("Error during user creation:", creationError);
-//         return next(new ErrorHandler(creationError.message, 500));
-//       }
-//     } catch (error) {
-//       return next(new ErrorHandler(error.message, 500));
-//     }
-//   })
-// );
-
-// login shop
-// router.post(
-//   "/login-seller",
-//   catchAsyncErrors(async (req, res, next) => {
-//     try {
-//       const { email, password } = req.body;
-
-//       if (!email || !password) {
-//         return next(new ErrorHandler("Please provide the all fields!", 400));
-//       }
-
-//       const user = await Seller.findOne({ email }).select("+password");
-
-//       if (!user) {
-//         return next(new ErrorHandler("User doesn't exists!", 400));
-//       }
-
-//       const isPasswordValid = await user.comparePassword(password);
-
-//       if (!isPasswordValid) {
-//         return next(
-//           new ErrorHandler("Please provide the correct information", 400)
-//         );
-//       }
-
-//       sendSellerToken(user, 201, res);
-//     } catch (error) {
-//       return next(new ErrorHandler(error.message, 500));
-//     }
-//   })
-// );
 
 // // load seller
 // router.get(

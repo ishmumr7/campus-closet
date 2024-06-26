@@ -16,7 +16,6 @@ const SellerCreate = () => {
   const [address, setAddress] = useState("");
   const [zipCode, setZipCode] = useState();
   const [avatar, setAvatar] = useState();
-  // const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -33,7 +32,6 @@ const SellerCreate = () => {
         toast.success(res.data.message);
         setName("");
         setEmail("");
-        // setPassword("");
         setAddress("");
         setPhoneNumber("");
         setZipCode("");
