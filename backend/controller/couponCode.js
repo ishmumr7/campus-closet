@@ -38,11 +38,11 @@ router.get(
   isSeller,
   catchAsyncErrors(async (req, res) => {
     try {
-      const couponCode = await CouponCode.find({ id: req.params.id });
+      const couponCodes = await CouponCode.find({ sellerId: req.params.id });
 
       res.status(201).json({
         success: true,
-        couponCode,
+        couponCodes,
       });
     } catch (error) {
       return next(new ErrorHandler(error, 400));

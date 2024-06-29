@@ -39,7 +39,7 @@ const SellerCoupons = () => {
         setIsLoading(false);
       });
   }, [dispatch]);
-
+ 
   useEffect(() => {
     dispatch(getAllProductsSeller(user._id));
   }, [dispatch]);
