@@ -3,7 +3,8 @@ import SellerDashboardPage from '../pages/Seller/SellerDashboardPage';
 import SellerCreateProductPage from '../pages/Seller/SellerCreateProductPage';
 import SellerProductsPage from '../pages/Seller/SellerProductsPage';
 import SellerCreateEventPage from '../pages/Seller/SellerCreateEventPage';
-import SellerEventsPage from '../pages/Seller/SellerEventsPage.jsx';
+import SellerEventsPage from '../pages/Seller/SellerEventsPage';
+import SellerCouponsPage from '../pages/Seller/SellerCouponsPage';
 
 export {
   SellerHomePage,
@@ -12,4 +13,5 @@ export {
   SellerProductsPage,
   SellerCreateEventPage,
   SellerEventsPage,
+  SellerCouponsPage
 }
