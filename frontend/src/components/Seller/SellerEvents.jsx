@@ -1,28 +1,28 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getAllProductsSeller } from "../../redux/actions/product";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { deleteEvent, getAllEventsSeller } from "../../redux/actions/event";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import Loader from "../Layout/Loader";
-import { DataGrid } from "@mui/x-data-grid";
 
 const SellerEvents = () => {
-  const { products, isLoading } = useSelector((state) => state.events);
+  const { events, isLoading } = useSelector((state) => state.events);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProductsSeller(user._id));
+    dispatch(getAllEventsSeller(user._id));
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
+    dispatch(deleteEvent(id));
     window.location.reload();
   };
 
   const columns = [
-    { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Event Id", minWidth: 150, flex: 0.7 },
     {
       field: "name",
       headerName: "Name",
@@ -58,10 +58,10 @@ const SellerEvents = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
-        const product_name = params.row.name.replace(/\s+/g, '-');
+        const event_name = params.row.name.replace(/\s+/g, '-');
         return (
           <>
-            <Link to={`/product/${product_name}`}>
+            <Link to={`/event/${event_name}`}>
               <Button>
                 <AiOutlineEye size={20} />
               </Button>
@@ -91,8 +91,8 @@ const SellerEvents = () => {
 
   const row = [];
 
-  products &&
-    products.forEach((item) => {
+  events &&
+    events.forEach((item) => {
       row.push({
         id: item._id,
         name: item.name,

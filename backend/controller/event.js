@@ -5,6 +5,7 @@ const User = require("../model/user");
 const Event = require("../model/event");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
+const { isSeller } = require("../middleware/auth");
 
 // Create Event
 router.post(
@@ -24,13 +25,52 @@ router.post(
         eventData.images = imageUrls;
         eventData.seller = seller;
 
-        const product = await Event.create(eventData);
+        const event = await Event.create(eventData);
 
         res.status(200).json({
           success: true,
-          product,
+          event,
         });
       }
+    } catch (error) {
+      return next(new ErrorHandler(error, 400));
+    }
+  })
+);
+
+//Get seller events
+router.get(
+  "/get-all-events-seller/:id",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const events = await Event.find({ sellerId: req.params.id });
+      res.status(201).json({
+        success: true,
+        events,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error, 400));
+    }
+  })
+);
+
+// Delete event
+router.delete(
+  "/delete-seller-event/:id",
+  isSeller,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const eventId = req.params.id;
+      const event = await Event.findByIdAndDelete(eventId);
+
+      if (!event) {
+        return next(new ErrorHandler("No event found with this id", 500));
+      }
+
+      res.status(201).json({
+        success: true,
+        message: "Event Deleted Successfully",
+      });
     } catch (error) {
       return next(new ErrorHandler(error, 400));
     }
