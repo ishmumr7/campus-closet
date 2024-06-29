@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { server } from '../../server';
 import { toast } from 'react-toastify';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import styles from '../../styles/styles';
 import { RxAvatar } from 'react-icons/rx';
 import { useSelector } from "react-redux";
 
@@ -16,7 +14,6 @@ const SellerCreate = () => {
   const [address, setAddress] = useState("");
   const [zipCode, setZipCode] = useState();
   const [avatar, setAvatar] = useState();
-  const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
