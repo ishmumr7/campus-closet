@@ -17,6 +17,7 @@ const SellerCreate = () => {
   const [zipCode, setZipCode] = useState();
   const [avatar, setAvatar] = useState();
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,9 +38,9 @@ const SellerCreate = () => {
         setZipCode("");
         setAvatar(null);
 
-        // if(res.data.success) {
-        //   navigate("/");
-        // }
+        if(res.data.success) {
+          navigate("/");
+        }
       })
       .catch((err) => {
         toast.error(err.response.data.message);
