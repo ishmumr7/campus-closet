@@ -5,7 +5,7 @@ const User = require("../model/user");
 const Event = require("../model/event");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
-// Create Procuct
+// Create Event
 router.post(
   "/create-event",
   upload.array("images"),
