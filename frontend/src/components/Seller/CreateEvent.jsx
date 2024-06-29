@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { categoriesData } from "../../static/data";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { createProduct } from "../../redux/actions/product";
+import { createEvent } from "../../redux/actions/event";
 
 const CreateEvent = () => {
   const { user } = useSelector((state) => state.user);
-  const { success, error } = useSelector((state) => state.products);
+  const { success, error } = useSelector((state) => state.events);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const CreateEvent = () => {
     const minEndDate = new Date(startDate.getTime() + 3 * 24 * 60 * 60 * 1000);
     setStartDate(startDate);
     setEndDate(null);
-    document.getElementById("end-date").min = minEndDate.toISOString.slice(
+    document.getElementById("end-date").min = minEndDate.toISOString().slice(
       0,
       10
     );
@@ -53,7 +53,7 @@ const CreateEvent = () => {
       console.log(error);
     }
     if(success) {
-      toast.success("Product Created Successfully!");
+      toast.success("Event Created Successfully!");
       navigate("/dashboard");
       window.location.reload();
     }
@@ -74,9 +74,11 @@ const CreateEvent = () => {
     newForm.append("originalPrice", originalPrice);
     newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
+    newForm.append("start_Date", startDate.toISOString());
+    newForm.append("end_Date", endDate.toISOString());
     newForm.append("sellerId", user._id);
 
-    dispatch(createProduct(newForm));
+    dispatch(createEvent(newForm));
   };
 
   const handleImageChange = (e) => {

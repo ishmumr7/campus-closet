@@ -44,11 +44,11 @@ const eventSchema = new mongoose.Schema({
             type: String,
         },
     ],
-    shopId:{
+    sellerId:{
         type: String,
         required: true,
     },
-    shop:{
+    seller:{
         type: Object,
         required: true,
     },

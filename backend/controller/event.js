@@ -4,6 +4,7 @@ const { upload } = require("../multer");
 const User = require("../model/user");
 const Event = require("../model/event");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const ErrorHandler = require("../utils/ErrorHandler");
 
 // Create Event
 router.post(
