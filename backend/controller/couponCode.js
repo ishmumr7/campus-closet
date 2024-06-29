@@ -50,4 +50,27 @@ router.get(
   })
 );
 
+// Delete coupon
+router.delete(
+  "/delete-coupon/:id",
+  isSeller,
+  catchAsyncErrors(async(req, res) => {
+    try {
+      const couponId = req.params.id;
+      const couponCode = await CouponCode.findByIdAndDelete(couponId);
+
+      if (!couponCode) {
+        return next(new ErrorHandler("No event found with this id", 500));
+      }
+
+      res.status(201).json({
+        success: true,
+        message: "Coupon Deleted Successfully",
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error, 400));
+    }
+  })
+)
+
 module.exports = router;
