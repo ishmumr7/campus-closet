@@ -63,7 +63,7 @@ const SellerCoupons = () => {
           maxAmount,
           selectedProducts,
           value,
-          shopId: user._id,
+          sellerId: user._id,
         },
         { withCredentials: true }
       )
