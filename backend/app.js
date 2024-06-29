@@ -27,10 +27,12 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 const user = require("./controller/user");
 const seller = require("./controller/seller");
 const product = require("./controller/product");
+const event = require("./controller/event");
 
 app.use("/api/v2/user", user);
 app.use("/api/v2/seller", seller);
 app.use("/api/v2/product", product);
+app.use("/api/v2/event", event);
 
 // Error handler
 app.use(ErrorHandler);
