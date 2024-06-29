@@ -7,7 +7,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const { isSeller } = require("../middleware/auth");
 const ErrorHandler = require("../utils/ErrorHandler");
 
-// Create Procuct
+// Create Event
 router.post(
   "/create-product",
   upload.array("images"),
