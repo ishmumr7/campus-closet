@@ -21,6 +21,7 @@ import {
   SellerCreateProductPage,
   SellerProductsPage,
   SellerCreateEventPage,
+  SellerEventsPage,
 } from "./routes/SellerRoutes.js";
 import ProtectedRoute from "./routes/ProtectedRoute.js";
 import "./App.css";
@@ -112,6 +113,14 @@ const App = () => {
           element={
             <SellerProtectedRoute>
               <SellerCreateEventPage />
+            </SellerProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard-events"
+          element={
+            <SellerProtectedRoute>
+              <SellerEventsPage />
             </SellerProtectedRoute>
           }
         />
