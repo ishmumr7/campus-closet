@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { upload } = require("../multer");
+const fs = require('fs');
 const Product = require("../model/product");
 const User = require("../model/user");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
@@ -61,6 +62,19 @@ router.delete(
   catchAsyncErrors(async (req, res, next) => {
     try {
       const productId = req.params.id;
+      const productData = await Product.findById(productId);
+
+      // Delete Image
+      productData.images.forEach((imgUrl) => {
+        const filename = imgUrl;
+        const filepath = `uploads/${filename}`;
+
+        fs.unlink(filepath, (err) => {
+          console.log(err);
+        })
+      });
+
+      // Delete product from db
       const product = await Product.findByIdAndDelete(productId);
 
       if (!product) {
