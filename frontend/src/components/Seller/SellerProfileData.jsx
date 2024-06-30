@@ -20,7 +20,7 @@ const SellerProfileData = ({ isOwner }) => {
 
   return (
     <div className="w-full">
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full items-center justify-between h-[55px] mb-6">
         <div className="w-full flex">
           <div className="flex items-center" onClick={() => setActive(1)}>
             <h5
