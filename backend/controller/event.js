@@ -55,6 +55,22 @@ router.get(
   })
 );
 
+//Get all events
+router.get(
+  "/get-all-events",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const events = await Event.find();
+      res.status(201).json({
+        success: true,
+        events,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error, 400));
+    }
+  })
+);
+
 // Delete event
 router.delete(
   "/delete-seller-event/:id",
@@ -71,7 +87,7 @@ router.delete(
 
         fs.unlink(filepath, (err) => {
           console.log(err);
-        })
+        });
       });
 
       // Delete product from db
