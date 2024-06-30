@@ -28,10 +28,9 @@ const CreateEvent = () => {
     const minEndDate = new Date(startDate.getTime() + 3 * 24 * 60 * 60 * 1000);
     setStartDate(startDate);
     setEndDate(null);
-    document.getElementById("end-date").min = minEndDate.toISOString().slice(
-      0,
-      10
-    );
+    document.getElementById("end-date").min = minEndDate
+      .toISOString()
+      .slice(0, 10);
   };
 
   const handleEndDateChange = (e) => {
@@ -48,17 +47,15 @@ const CreateEvent = () => {
     : "";
 
   useEffect(() => {
-    if(error) {
+    if (error) {
       toast.error(error);
-      console.log(error);
     }
-    if(success) {
-      toast.success("Event Created Successfully!");
+    if (success) {
+      toast.success("Event created successfully!");
       navigate("/dashboard");
       window.location.reload();
     }
   }, [dispatch, error, success, navigate]);
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,7 +63,7 @@ const CreateEvent = () => {
     const newForm = new FormData();
     images.forEach((image) => {
       newForm.append("images", image);
-    })
+    });
     newForm.append("name", name);
     newForm.append("description", description);
     newForm.append("category", category);
@@ -214,7 +211,7 @@ const CreateEvent = () => {
             placeholder="Enter your event product stock..."
           />
         </div>
-        
+
         <div className="mb-5">
           <label className="pb-2">
             Event End Date <span className="text-red-500">*</span>
