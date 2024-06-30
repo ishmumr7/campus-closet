@@ -5,7 +5,8 @@ import ProductDetails from '../components/Products/ProductDetails';
 import SuggestedProduct from '../components/Products/SuggestedProduct';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { productData } from '../static/data';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from '../redux/actions/product';
 
 const ProductDetailsPage = () => {
   const { allProducts } = useSelector((state) => state.products);
@@ -14,6 +15,11 @@ const ProductDetailsPage = () => {
   const [data, setData] = useState(null);
   const [searchParams] = useSearchParams();
   const eventData = searchParams.get("isEvent");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
   useEffect(() => {
     if (eventData !== null) {
@@ -24,7 +30,6 @@ const ProductDetailsPage = () => {
       setData(data);
     }
   }, [allProducts, allEvents]);
-  
 
   return (
     <div>

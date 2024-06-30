@@ -44,41 +44,7 @@ const ProductDetails = ({ data }) => {
         <div className={`${styles.section} w-[90%] 800px:w-[80%]`}>
           <div className="w-full py-5">
             <div className="block w-full 800px:flex">
-              {/* <div className="w-full 800px:w-[50%]">
-                <img
-                  src={`${data.images[select]}`}
-                  alt=""
-                  className="w-[80%]"
-                />
-                <div className="w-full flex">
-                  <div
-                    className={`${
-                      select === 0 ? "border" : null
-                    } cursor-pointer`}
-                  >
-                    <img
-                      src={data?.images[0]}
-                      alt=""
-                      className="h-[150px]"
-                      onClick={() => setSelect(0)}
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      select === 0 ? "border" : null
-                    } cursor-pointer`}
-                  >
-                    <img
-                      src={data?.images[0]}
-                      alt=""
-                      className="h-[150px]"
-                      onClick={() => setSelect(0)}
-                    />
-                  </div>
-                </div>
-              </div> */}
-
-              {/* fiahu;guugduuuuuuuuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
+              {/* Image selection */}
               <div className="w-full 800px:w-[50%]">
                 <img
                   src={`${backend_url}/${data.images[select]}`}
@@ -103,7 +69,6 @@ const ProductDetails = ({ data }) => {
                   ))}
                 </div>
               </div>
-              {/* fiahu;guugduuuuuuuuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
 
               <div className="w-full 800px:w-[50%] pt-5">
                 <h1 className={`${styles.productTitle}`}>{data.name}</h1>
@@ -262,14 +227,6 @@ const ProductDetailsInfo = ({ data }) => {
           <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
             {data.description}
           </p>
-
-          <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
-            {data.description}
-          </p>
-
-          <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
-            {data.description}
-          </p>
         </>
       ) : null}
 
@@ -282,22 +239,22 @@ const ProductDetailsInfo = ({ data }) => {
       {active === 3 ? (
         <div className="w-full block 800px:flex p-5">
           <div className="w-full 800px:w-[50%]">
-            <Link to={`/shop/preview/${data.shop._id}`}>
+            <Link to={`/shop/preview/${data.sellerId}`}>
               <div className="flex items-center">
                 <img
-                  src={`${data.shop.shop_avatar.url}`}
-                  className="w-[50px] h-[50px] rounded-full"
+                  src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                   alt=""
+                  className="w-[50px] h-[50px] rounded-full"
                 />
                 <div className="pl-3">
-                  <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
+                  <h3 className={`${styles.shop_name}`}>{data.seller.name}</h3>
                   <h5 className="pb-2 text-[15px]">
-                    ({data.shop.ratings}) Ratings
+                    ({data.seller.ratings}) Ratings
                   </h5>
                 </div>
               </div>
             </Link>
-            <p className="pt-2">{data.shop.description}</p>
+            <p className="pt-2">{"data.seller.addresses[0].address1"}</p>
           </div>
 
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
