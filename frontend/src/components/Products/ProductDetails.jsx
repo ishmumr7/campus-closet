@@ -12,11 +12,13 @@ import {
 } from "react-icons/ai";
 import { getAllProductsSeller } from "../../redux/actions/product";
 import { backend_url } from "../../server";
+import { addTocart } from "../../redux/actions/cart";
 
 const ProductDetails = ({ data }) => {
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
+  const { cart } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,13 +26,30 @@ const ProductDetails = ({ data }) => {
     dispatch(getAllProductsSeller(data && data?.sellerId));
   }, [data]);
 
-  const decrementCount = () => {
-    count > 1 ? setCount(count - 1) : setCount(1);
+  const incrementCount = () => {
+    if (count < data.stock) {
+      setCount(count + 1)
+    } else {
+      toast.error("Stock unavailable!");
+    }
   };
 
-  const incrementCount = () => {
-    setCount(count + 1);
+  const decrementCount = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
   };
+
+  const addToCartHandler = (id) => {
+    const itemExists = cart && cart.find((i) => i._id === id);
+    if (itemExists) {
+      toast.error("Item already added to cart!");
+    } else {
+      const cartData = {...data, qty: count};
+      dispatch(addTocart(cartData));
+      toast.success("Item added to cart!");
+    }
+  }
 
   const handleMessageSubmit = () => {
     navigate("/inbox?coversation=53ktjtnef9g83ht93756yhwf46");
@@ -122,7 +141,7 @@ const ProductDetails = ({ data }) => {
                 </div>
                 <div
                   className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
-                  // onClick={() => addToCartHandler(data._id)}
+                  onClick={() => addToCartHandler(data._id)}
                 >
                   <span className="text-white flex items-center">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />

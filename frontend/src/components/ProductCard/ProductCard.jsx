@@ -13,19 +13,34 @@ import {
 } from "react-icons/ai";
 import ProductDetailsCard from "./../Home/ProductDetailsCard/ProductDetailsCard.jsx";
 import { backend_url } from "../../server.js";
+import { toast } from "react-toastify";
+import { addTocart } from "../../redux/actions/cart.js";
 
 const ProductCard = ({ data, isEvent }) => {
   const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // const d = data.name;
-  // const product_name = d.replace(/\s+/g, "-");
+  const addToCartHandler = (id) => {
+    const itemExists = cart && cart.find((i) => i._id === id);
+    if (itemExists) {
+      toast.error("Item already added to cart!");
+    } else {
+      const cartData = { ...data, qty: 1 };
+      dispatch(addTocart(cartData));
+      toast.success("Item added to cart!");
+    }
+  };
 
   return (
     <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
       <div className="flex justify-end"></div>
-      <Link to={isEvent ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}>
+      <Link
+        to={
+          isEvent ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`
+        }
+      >
         <img
           src={`${backend_url}/${data.images && data.images[0]}`}
           alt={data.name}
@@ -35,16 +50,40 @@ const ProductCard = ({ data, isEvent }) => {
       <Link to={`/seller/preview/${data?.sellerId}`}>
         <h5 className={styles.shop_name}>{data?.seller?.name}</h5>
       </Link>
-      <Link to={isEvent ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}>
+      <Link
+        to={
+          isEvent ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`
+        }
+      >
         <h4 className="pb-3 font-[500] h-[4em]">
           {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
         </h4>
         <div className="flex">
-          <AiFillStar className="mr-2 cursor-pointer" color="#F6BA00" size={20} />
-          <AiFillStar className="mr-2 cursor-pointer" color="#F6BA00" size={20} />
-          <AiFillStar className="mr-2 cursor-pointer" color="#F6BA00" size={20} />
-          <AiFillStar className="mr-2 cursor-pointer" color="#F6BA00" size={20} />
-          <AiOutlineStar className="mr-2 cursor-pointer" color="#F6BA00" size={20} />
+          <AiFillStar
+            className="mr-2 cursor-pointer"
+            color="#F6BA00"
+            size={20}
+          />
+          <AiFillStar
+            className="mr-2 cursor-pointer"
+            color="#F6BA00"
+            size={20}
+          />
+          <AiFillStar
+            className="mr-2 cursor-pointer"
+            color="#F6BA00"
+            size={20}
+          />
+          <AiFillStar
+            className="mr-2 cursor-pointer"
+            color="#F6BA00"
+            size={20}
+          />
+          <AiOutlineStar
+            className="mr-2 cursor-pointer"
+            color="#F6BA00"
+            size={20}
+          />
         </div>
         <div className="py-2 flex items-center justify-between">
           <div className="flex">
@@ -92,6 +131,7 @@ const ProductCard = ({ data, isEvent }) => {
           className="cursor-pointer absolute right-2 top-24"
           color="#333"
           title="Add to Cart"
+          onClick={() => addToCartHandler(data._id)}
         />
 
         {open && <ProductDetailsCard setOpen={setOpen} data={data} />}
