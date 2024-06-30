@@ -5,12 +5,18 @@ import { useSearchParams } from "react-router-dom";
 import { productData } from "../static/data";
 import styles from "../styles/styles";
 import ProductCard from "../components/ProductCard/ProductCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Layout/Loader";
+import { getAllProducts } from "../redux/actions/product";
 
 const BestSellingPage = () => {
   const [data, setData] = useState([]);
   const { allProducts, isLoading } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
   useEffect(() => {
     const allProductsData = allProducts ? [...allProducts] : [];
