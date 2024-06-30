@@ -255,7 +255,7 @@ const ProductDetailsInfo = ({ data }) => {
                 </div>
               </div>
             </Link>
-            <p className="pt-2">{"data.seller.addresses[0].address1"}</p>
+            <p className="pt-2">{data.seller.addresses[0].address1}</p>
           </div>
 
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
