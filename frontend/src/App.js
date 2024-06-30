@@ -32,10 +32,12 @@ import { useEffect } from "react";
 import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
 import SellerProtectedRoute from "./routes/SellerProtectedRoute.js";
+import { getAllProducts } from "./redux/actions/product.js";
 
 const App = () => {
   useEffect(() => {
     Store.dispatch(loadUser());
+    Store.dispatch(getAllProducts());
   }, []);
 
   return (
