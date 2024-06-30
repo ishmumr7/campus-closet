@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { upload } = require("../multer");
-const fs = require('fs');
+const fs = require("fs");
 const Product = require("../model/product");
 const User = require("../model/user");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
@@ -55,6 +55,23 @@ router.get(
   })
 );
 
+// get all products
+router.get(
+  "/get-all-products",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const products = await Product.find().sort({ createdAt: -1 });
+
+      res.status(201).json({
+        success: true,
+        products,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error, 400));
+    }
+  })
+);
+
 // Delete product
 router.delete(
   "/delete-seller-product/:id",
@@ -71,7 +88,7 @@ router.delete(
 
         fs.unlink(filepath, (err) => {
           console.log(err);
-        })
+        });
       });
 
       // Delete product from db
