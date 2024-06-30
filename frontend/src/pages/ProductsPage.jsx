@@ -5,23 +5,30 @@ import { useSearchParams } from "react-router-dom";
 import { productData } from "../static/data";
 import ProductCard from "../components/ProductCard/ProductCard";
 import Footer from "../components/Layout/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../redux/actions/product";
 
-const ProductPage = () => {
+const ProductsPage = () => {
   const [searchParams] = useSearchParams();
   const categoryData = searchParams.get("category");
+  const { allProducts, isLoading } = useSelector((state) => state.products);
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
   useEffect(() => {
     if (categoryData === null) {
-      const d = productData;
+      const d = allProducts;
       setData(d);
     } else {
       const d =
-        productData; 
-      const filtered = d.filter((i) => i.category === categoryData);
-      setData(filtered);
+      allProducts && allProducts.filter((i) => i.category === categoryData);
+      setData(d);
     }
-  }, []);
+  }, [allProducts ]);
 
   return (
     <div>
@@ -44,4 +51,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default ProductsPage;

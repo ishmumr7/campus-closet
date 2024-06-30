@@ -7,11 +7,13 @@ import {
   AiOutlineMessage,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setselect] = useState(false);
+  const dispatch = useDispatch();
 
   const handleMessageSubmit = () => {};
 
@@ -36,17 +38,17 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
-                <img src={`${data.image_Url[0]?.url}`} alt="" />
+                <img src={`${data.images[0]}`} alt="" />
                 <div className="flex">
                   <img
                     className=" h-[50px] w-[50px] rounded mr-2 "
-                    src={data.shop.shop_avatar.url}
+                    src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                     alt=""
                   />
                   <div>
-                    <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
+                    <h3 className={`${styles.shop_name}`}>{data.seller.name}</h3>
                     <h5 className="pb-3 text-[15px]">
-                      ({data.shop.ratings}) Rating
+                      ({data.seller.ratings}) Rating
                     </h5>
                   </div>
                 </div>
@@ -65,7 +67,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   </span>
                 </div>
                 <h5 className="text-[16px] text-[red]">
-                  {data.total_sell} Sold
+                  {data?.sold_out} Sold
                 </h5>
               </div>
 
@@ -77,10 +79,10 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
-                    {data.discount_price} RM
+                    {data.discountPrice} RM
                   </h4>
                   <h3 className={styles.price}>
-                    {data.price ? data.price + " RM" : null}
+                    {data.originalPrice ? data.originalPrice + " RM" : null}
                   </h3>
                 </div>
                 <div className="flex items-center mt-12 justify-between pr-3">

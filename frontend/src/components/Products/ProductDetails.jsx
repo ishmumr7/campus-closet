@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import axios from "axios";
 import styles from "../../styles/styles";
 import {
   AiFillHeart,
@@ -7,11 +10,19 @@ import {
   AiOutlineMessage,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
+import { getAllProductsSeller } from "../../redux/actions/product";
+import { backend_url } from "../../server";
 
 const ProductDetails = ({ data }) => {
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductsSeller(data && data?.sellerId));
+  }, [data]);
 
   const decrementCount = () => {
     count > 1 ? setCount(count - 1) : setCount(1);
@@ -25,8 +36,6 @@ const ProductDetails = ({ data }) => {
     navigate("/inbox?coversation=53ktjtnef9g83ht93756yhwf46");
   };
 
-  const navigate = useNavigate();
-
   return (
     <div className=" bg-white pb-10">
       {" "}
@@ -35,9 +44,9 @@ const ProductDetails = ({ data }) => {
         <div className={`${styles.section} w-[90%] 800px:w-[80%]`}>
           <div className="w-full py-5">
             <div className="block w-full 800px:flex">
-              <div className="w-full 800px:w-[50%]">
+              {/* <div className="w-full 800px:w-[50%]">
                 <img
-                  src={`${data.image_Url[select]?.url}`}
+                  src={`${data.images[select]}`}
                   alt=""
                   className="w-[80%]"
                 />
@@ -48,7 +57,7 @@ const ProductDetails = ({ data }) => {
                     } cursor-pointer`}
                   >
                     <img
-                      src={data?.image_Url[0].url}
+                      src={data?.images[0]}
                       alt=""
                       className="h-[150px]"
                       onClick={() => setSelect(0)}
@@ -60,24 +69,51 @@ const ProductDetails = ({ data }) => {
                     } cursor-pointer`}
                   >
                     <img
-                      src={data?.image_Url[0].url}
+                      src={data?.images[0]}
                       alt=""
                       className="h-[150px]"
                       onClick={() => setSelect(0)}
                     />
                   </div>
                 </div>
+              </div> */}
+
+              {/* fiahu;guugduuuuuuuuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
+              <div className="w-full 800px:w-[50%]">
+                <img
+                  src={`${backend_url}/${data.images[select]}`}
+                  alt=""
+                  className="w-[80%]"
+                />
+                <div className="w-full flex">
+                  {data.images.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`${
+                        select === index ? "border" : ""
+                      } cursor-pointer`}
+                    >
+                      <img
+                        src={`${backend_url}/${data.images[index]}`}
+                        alt=""
+                        className="h-[100px]"
+                        onClick={() => setSelect(index)}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
+              {/* fiahu;guugduuuuuuuuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
 
               <div className="w-full 800px:w-[50%] pt-5">
                 <h1 className={`${styles.productTitle}`}>{data.name}</h1>
                 <p>{data.description}</p>
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
-                    {data.discount_price} RM
+                    {data.discountPrice} RM
                   </h4>
                   <h3 className={`${styles.price}`}>
-                    {data.price ? data.price + " RM" : null}
+                    {data.originalPrice ? data.originalPrice + " RM" : null}
                   </h3>
                 </div>
 
@@ -128,21 +164,21 @@ const ProductDetails = ({ data }) => {
                   </span>
                 </div>
                 <div className="flex items-center pt-8">
-                  <Link to={`/shop/preview/${data?.shop._id}`}>
+                  <Link to={`/shop/preview/${data?.sellerId}`}>
                     <img
-                      src={`${data.shop.shop_avatar.url}`}
+                      src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />
                   </Link>
                   <div className="pr-8">
-                    <Link to={`/shop/preview/${data?.shop._id}`}>
+                    <Link to={`/shop/preview/${data?.sellerId}`}>
                       <h3 className={`${styles.shop_name} pb-1 pt-1`}>
-                        {data.shop.name}
+                        {data.seller.name}
                       </h3>
                     </Link>
                     <h5 className="pb-3 text-[15px]">
-                      ({data.shop.ratings}) Ratings
+                      ({data.seller.ratings}) Ratings
                     </h5>
                   </div>
                   <div
