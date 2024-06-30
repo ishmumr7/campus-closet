@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import styles from "../../../styles/styles";
 import {
@@ -11,19 +11,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { backend_url } from "../../../server";
 import { toast } from "react-toastify";
 import { addTocart } from "../../../redux/actions/cart";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../../redux/actions/wishlist";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setselect] = useState(false);
   const { cart } = useSelector((state) => state.cart);
+  const { wishlist } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
   const handleMessageSubmit = () => {};
 
   const incrementCount = () => {
     if (count < data.stock) {
-      setCount(count + 1)
+      setCount(count + 1);
     } else {
       toast.error("Stock unavailable!");
     }
@@ -40,11 +45,29 @@ const ProductDetailsCard = ({ setOpen, data }) => {
     if (itemExists) {
       toast.error("Item already added to cart!");
     } else {
-      const cartData = {...data, qty: count};
+      const cartData = { ...data, qty: count };
       dispatch(addTocart(cartData));
       toast.success("Item added to cart!");
     }
-  }
+  };
+
+  useEffect(() => {
+    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+      setClick(true);
+    } else {
+      setClick(false);
+    }
+  }, [wishlist]);
+
+  const removeFromWishlistHandler = (data) => {
+    setClick(!click);
+    dispatch(removeFromWishlist(data));
+  };
+
+  const addToWishlistHandler = (data) => {
+    setClick(!click);
+    dispatch(addToWishlist(data));
+  };
 
   return (
     <div className="bg-[#fff]">
@@ -67,7 +90,9 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                     alt=""
                   />
                   <div>
-                    <h3 className={`${styles.shop_name}`}>{data.seller.name}</h3>
+                    <h3 className={`${styles.shop_name}`}>
+                      {data.seller.name}
+                    </h3>
                     <h5 className="pb-3 text-[15px]">
                       ({data.seller.ratings}) Rating
                     </h5>
@@ -129,7 +154,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                       <AiFillHeart
                         size={22}
                         className=" cursor-pointer "
-                        onClick={() => setClick(!click)}
+                        onClick={() => removeFromWishlistHandler(data)}
                         color={click ? "red" : "#333"}
                         title="Remove from wishlist"
                       />
@@ -137,7 +162,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                       <AiOutlineHeart
                         size={22}
                         className=" cursor-pointer "
-                        onClick={() => setClick(!click)}
+                        onClick={() => addToWishlistHandler(data)}
                         color={click ? "red" : "#333"}
                         title="Add to wishlist"
                       />

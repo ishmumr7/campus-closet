@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/styles";
@@ -15,11 +15,16 @@ import ProductDetailsCard from "./../Home/ProductDetailsCard/ProductDetailsCard.
 import { backend_url } from "../../server.js";
 import { toast } from "react-toastify";
 import { addTocart } from "../../redux/actions/cart.js";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../redux/actions/wishlist.js";
 
 const ProductCard = ({ data, isEvent }) => {
   const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
   const { cart } = useSelector((state) => state.cart);
+  const { wishlist } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
   const addToCartHandler = (id) => {
@@ -31,6 +36,24 @@ const ProductCard = ({ data, isEvent }) => {
       dispatch(addTocart(cartData));
       toast.success("Item added to cart!");
     }
+  };
+
+  useEffect(() => {
+    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+      setClick(true);
+    } else {
+      setClick(false);
+    }
+  }, [wishlist]);
+
+  const removeFromWishlistHandler = (data) => {
+    setClick(!click);
+    dispatch(removeFromWishlist(data));
+  };
+
+  const addToWishlistHandler = (data) => {
+    setClick(!click);
+    dispatch(addToWishlist(data));
   };
 
   return (
@@ -106,7 +129,7 @@ const ProductCard = ({ data, isEvent }) => {
           <AiFillHeart
             size={22}
             className="cursor-pointer absolute right-2 top-5"
-            onClick={() => setClick(!click)}
+            onClick={() => removeFromWishlistHandler(data)}
             color="red"
             title="Remove from wishlist"
           />
@@ -114,7 +137,7 @@ const ProductCard = ({ data, isEvent }) => {
           <AiOutlineHeart
             size={22}
             className="cursor-pointer absolute right-2 top-5"
-            onClick={() => setClick(!click)}
+            onClick={() => addToWishlistHandler(data)}
             color="#333"
             title="Add to wishlist"
           />
