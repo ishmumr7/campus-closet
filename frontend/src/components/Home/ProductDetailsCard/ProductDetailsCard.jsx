@@ -8,6 +8,7 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { backend_url } from "../../../server";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
   const [count, setCount] = useState(1);
@@ -38,7 +39,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
-                <img src={`${data.images[0]}`} alt="" />
+                <img src={`${backend_url}/${data.images[0]}`} alt="" />
                 <div className="flex">
                   <img
                     className=" h-[50px] w-[50px] rounded mr-2 "
