@@ -48,6 +48,26 @@ export const getAllEventsSeller = (id) => async (dispatch) => {
   }
 };
 
+// Get all events
+export const getAllEvents = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "getAlleventsRequest",
+    });
+
+    const { data } = await axios.get(`${server}/event/get-all-events`);
+    dispatch({
+      type: "getAlleventsSuccess",
+      payload: data.events,
+    });
+  } catch (error) {
+    dispatch({
+      type: "getAlleventsFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
 // Delete event
 export const deleteEvent = (id) => async (dispatch) => {
   try {
