@@ -28,6 +28,7 @@ export const productReducer = createReducer(initialState, (builder) => {
         success: false,
       };
     })
+    
     // Get seller products
     .addCase("getAllProductsSellerRequest", (state) => {
       return {
@@ -40,7 +41,6 @@ export const productReducer = createReducer(initialState, (builder) => {
         ...state,
         isLoading: false,
         products: action.payload,
-        success: true,
       };
     })
     .addCase("getAllProductsSellerFail", (state, action) => {
@@ -48,7 +48,6 @@ export const productReducer = createReducer(initialState, (builder) => {
         ...state,
         isLoading: false,
         error: action.payload,
-        success: false,
       };
     })
 
