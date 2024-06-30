@@ -8,8 +8,6 @@ const SuggestedProduct = ({ data }) => {
   const {allProducts} = useSelector((state) => state.products);
   const [productData,setProductData] = useState();
 
-  console.log(allProducts);
-
   useEffect(() => {
     const d =
     allProducts && allProducts.filter((i) => i.category === data.category);
