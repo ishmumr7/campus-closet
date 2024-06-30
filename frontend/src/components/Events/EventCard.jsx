@@ -29,7 +29,7 @@ const EventCard = ({ active, data }) => {
             {data.sold_out} sold
           </span>
         </div>
-        <CountDown />
+        <CountDown data={data} />
       </div>
     </div>
   );
