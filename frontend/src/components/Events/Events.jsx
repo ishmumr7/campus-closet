@@ -6,12 +6,7 @@ import { getAllEvents } from "../../redux/actions/event.js";
 
 const Events = () => {
   const { allEvents, isLoading } = useSelector((state) => state.events);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getAllEvents);
-  // }, [dispatch])
 
-  console.log(allEvents)
   return (
     <div>
       {!isLoading && (
