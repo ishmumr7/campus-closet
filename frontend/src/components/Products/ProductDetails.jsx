@@ -54,12 +54,12 @@ const ProductDetails = ({ data }) => {
   };
 
   useEffect(() => {
-    if (wishlist && wishlist.find((i) => i._id === data._id)) {
+    if (data && wishlist && wishlist.find((i) => i._id === data._id)) {
       setClick(true);
     } else {
       setClick(false);
     }
-  }, [wishlist]);
+  }, [wishlist, data]);
 
   const removeFromWishlistHandler = (data) => {
     setClick(!click);
