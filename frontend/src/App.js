@@ -33,11 +33,13 @@ import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
 import SellerProtectedRoute from "./routes/SellerProtectedRoute.js";
 import { getAllProducts } from "./redux/actions/product.js";
+import { getAllEvents } from "./redux/actions/event.js";
 
 const App = () => {
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(getAllProducts());
+    Store.dispatch(getAllEvents());
   }, []);
 
   return (
