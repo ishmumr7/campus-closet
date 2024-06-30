@@ -32,7 +32,7 @@ const ProductCard = ({ data, isEvent }) => {
           className="w-[80%] h-[170px] object-contain"
         />
       </Link>
-      <Link to="/">
+      <Link to={`/seller/preview/${data?.sellerId}`}>
         <h5 className={styles.shop_name}>{data?.seller?.name}</h5>
       </Link>
       <Link to={isEvent ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}>

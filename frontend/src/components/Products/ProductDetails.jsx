@@ -129,7 +129,7 @@ const ProductDetails = ({ data }) => {
                   </span>
                 </div>
                 <div className="flex items-center pt-8">
-                  <Link to={`/shop/preview/${data?.sellerId}`}>
+                  <Link to={`/seller/preview/${data?.sellerId}`}>
                     <img
                       src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                       alt=""
@@ -137,7 +137,7 @@ const ProductDetails = ({ data }) => {
                     />
                   </Link>
                   <div className="pr-8">
-                    <Link to={`/shop/preview/${data?.sellerId}`}>
+                    <Link to={`/seller/preview/${data?.sellerId}`}>
                       <h3 className={`${styles.shop_name} pb-1 pt-1`}>
                         {data.seller.name}
                       </h3>
@@ -239,7 +239,7 @@ const ProductDetailsInfo = ({ data }) => {
       {active === 3 ? (
         <div className="w-full block 800px:flex p-5">
           <div className="w-full 800px:w-[50%]">
-            <Link to={`/shop/preview/${data.sellerId}`}>
+            <Link to={`/seller/preview/${data.sellerId}`}>
               <div className="flex items-center">
                 <img
                   src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
@@ -275,7 +275,7 @@ const ProductDetailsInfo = ({ data }) => {
                 <div
                   className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}
                 >
-                  <h4 className="text-white">Visit Shop</h4>
+                  <h4 className="text-white">Visit Seller</h4>
                 </div>
               </Link>
             </div>

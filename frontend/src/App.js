@@ -14,6 +14,7 @@ import {
   CheckoutPage,
   ProfilePage,
   SellerCreatePage,
+  SellerPreviewPage,
 } from "./routes/Routes.js";
 import {
   SellerHomePage,
@@ -68,6 +69,8 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/seller/preview/:id" element={<SellerPreviewPage />} />
+
         {/* SELLER */}
         <Route
           path="/seller-create"
