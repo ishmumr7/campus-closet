@@ -9,6 +9,7 @@ import FAQPage from "./../pages/FAQPage";
 import ProductDetailsPage from "./../pages/ProductDetailsPage";
 import ProfilePage from "./../pages/ProfilePage";
 import CheckoutPage from "./../pages/CheckoutPage";
+import PaymentPage from "./../pages/PaymentPage";
 import SellerCreatePage from "./../pages/SellerCreatePage";
 import SellerPreviewPage from "./../pages/SellerPreviewPage.jsx";
 
@@ -26,4 +27,5 @@ export {
   ProfilePage,
   SellerCreatePage,
   SellerPreviewPage,
+  PaymentPage,
 };

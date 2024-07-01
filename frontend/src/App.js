@@ -12,6 +12,7 @@ import {
   EventsPage,
   FAQPage,
   CheckoutPage,
+  PaymentPage,
   ProfilePage,
   SellerCreatePage,
   SellerPreviewPage,
@@ -65,6 +66,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/payment" element={<PaymentPage />} />
         <Route
           path="/profile"
           element={
