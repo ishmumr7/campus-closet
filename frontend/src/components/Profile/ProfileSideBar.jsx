@@ -107,7 +107,7 @@ const ProfileSideBar = ({ setActive, active }) => {
             active === 6 ? "text-[red]" : ""
           } 800px:block hidden`}
         >
-          Payment Methods
+          Change Password
         </span>
       </div>
 
