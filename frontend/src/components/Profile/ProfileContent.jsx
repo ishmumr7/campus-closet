@@ -11,6 +11,7 @@ import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid/DataGrid";
 import { MdTrackChanges } from "react-icons/md";
 import {
+  deleteUserAddress,
   updateUserAddress,
   updateUserInformation,
 } from "../../redux/actions/user";
@@ -542,8 +543,9 @@ const Address = () => {
   };
 
   const handleDelete = (data) => {
-
-  }
+    const id = data._id;
+    dispatch(deleteUserAddress(id));
+  };
 
   return (
     <div className="w-full px-5">
@@ -674,52 +676,38 @@ const Address = () => {
       </div>
       <br />
       {user &&
-  user.addresses.map((item, index) => (
-    <div
-      className="w-full bg-white h-min 800px:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10 mb-5"
-      key={index}
-    >
-      <div className="flex items-center flex-[1_1_20%]">
-        <h5 className="pl-5 font-[600]">{item.addressType}</h5>
-      </div>
-      <div className="flex items-center flex-[1_1_50%]">
-        <h6 className="text-[12px] 800px:text-[unset]">
-          {item.address1} {item.address2}
-        </h6>
-      </div>
-      <div className="flex items-center flex-[1_1_20%]">
-        <h6 className="text-[12px] 800px:text-[unset]">
-          {user && user.phoneNumber}
-        </h6>
-      </div>
-      <div className="flex items-center flex-[1_1_10%] justify-end pl-8">
-        <AiOutlineDelete
-          size={25}
-          className="cursor-pointer"
-          onClick={() => handleDelete(item)}
-        />
-      </div>
-    </div>
-  ))}
-
-        {/* <div className="w-full bg-white h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10">
-          <div className="flex items-center">
-            <h5 className=" pl-5 font-[600]">Default Address</h5>
+        user.addresses.map((item, index) => (
+          <div
+            className="w-full bg-white h-min 800px:h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10 mb-5"
+            key={index}
+          >
+            <div className="flex items-center flex-[1_1_20%]">
+              <h5 className="pl-5 font-[600]">{item.addressType}</h5>
+            </div>
+            <div className="flex items-center flex-[1_1_50%]">
+              <h6 className="text-[12px] 800px:text-[unset]">
+                {item.address1} {item.address2}
+              </h6>
+            </div>
+            <div className="flex items-center flex-[1_1_20%]">
+              <h6 className="text-[12px] 800px:text-[unset]">
+                {user && user.phoneNumber}
+              </h6>
+            </div>
+            <div className="flex items-center flex-[1_1_10%] justify-end pl-8">
+              <AiOutlineDelete
+                size={25}
+                className="cursor-pointer"
+                color="red"
+                onClick={() => handleDelete(item)}
+              />
+            </div>
           </div>
-          <div className="pl-8 flex items-center">
-            <h6>Kolej Tun Ghaffar Baba, UTM</h6>
-          </div>
-          <div className="pl-8 flex items-center">
-            <h6>0146830582</h6>
-          </div>
-          <div className="min-w-[10%] flex items-center justify-between pl-8">
-            <AiOutlineDelete size={25} className=" cursor-pointer " />
-          </div>
-        </div> */}
+        ))}
 
       {user && user.addresses.length === 0 && (
         <h5 className="text-center pt-8 text-[18px]">
-          You not have any saved address!
+          You don't have any saved address!
         </h5>
       )}
     </div>
