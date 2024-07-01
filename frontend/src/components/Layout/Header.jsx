@@ -123,7 +123,7 @@ const Header = ({ activeHeading }) => {
               </div>
             ) : null}
           </div>
-          <div className={`${styles.button}`}>
+          <div className={`${styles.button} `}>
             <Link to="/seller-create">
               <h1 className="text-[#FFF] flex items-center">
                 Start selling <IoIosArrowForward className="ml-1" />{" "}

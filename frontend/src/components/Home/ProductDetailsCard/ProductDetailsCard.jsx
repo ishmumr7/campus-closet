@@ -15,6 +15,7 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "../../../redux/actions/wishlist";
+import { Link } from "react-router-dom";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
   const [count, setCount] = useState(1);
@@ -83,21 +84,23 @@ const ProductDetailsCard = ({ setOpen, data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <img src={`${backend_url}/${data.images[0]}`} alt="" />
-                <div className="flex">
-                  <img
-                    className=" h-[50px] w-[50px] rounded mr-2 "
-                    src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                    alt=""
-                  />
-                  <div>
-                    <h3 className={`${styles.shop_name}`}>
-                      {data.seller.name}
-                    </h3>
-                    <h5 className="pb-3 text-[15px]">
-                      ({data.seller.ratings}) Rating
-                    </h5>
+                <Link to={`/seller/preview/${data?.sellerId}`}>
+                  <div className="flex">
+                    <img
+                      className=" h-[50px] w-[50px] rounded mr-2 "
+                      src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                      alt=""
+                    />
+                    <div>
+                      <h3 className={`${styles.shop_name}`}>
+                        {data.seller.name}
+                      </h3>
+                      <h5 className="pb-3 text-[15px]">
+                        ({data.seller.ratings}) Rating
+                      </h5>
+                    </div>
                   </div>
-                </div>
+                </Link>
                 <div
                   className={`${styles.button}`}
                   style={{
