@@ -4,7 +4,6 @@ const User = require("./../model/user");
 const router = express.Router();
 const { upload } = require("../multer");
 const ErrorHandler = require("../utils/ErrorHandler");
-const catchAsyncError = require("../middleware/catchAsyncErrors");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
@@ -64,7 +63,7 @@ const createActivationToken = (user) => {
 // Activate User
 router.post(
   "/activation",
-  catchAsyncError(async (req, res, next) => {
+  catchAsyncErrors(async (req, res, next) => {
     try {
       const { activation_token } = req.body;
 
@@ -138,7 +137,7 @@ router.post(
 router.get(
   "/getuser",
   isAuthenticated,
-  catchAsyncError(async (req, res, next) => {
+  catchAsyncErrors(async (req, res, next) => {
     try {
       const user = await User.findById(req.user.id);
       if (!user) {
@@ -171,25 +170,60 @@ router.get(
   })
 );
 
+// Update user
+router.put(
+  "/update-user",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { email, password, phoneNumber, name } = req.body;
+
+      const user = await User.findOne({ email }).select("+password");
+
+      if (!user) {
+        return next(new ErrorHandler("User not found", 400));
+      }
+
+      const isPasswordValid = await user.comparePassword(password);
+
+      if (!isPasswordValid) {
+        return next(
+          new ErrorHandler("Please provide the correct information", 400)
+        );
+      }
+
+      user.name = name;
+      user.phoneNumber = phoneNumber;
+
+      await user.save();
+
+      res.status(201).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
 // Log out user
 router.get(
   "/logout",
   isAuthenticated,
-  catchAsyncError(async (req, res, next) => {
+  catchAsyncErrors(async (req, res, next) => {
     try {
-       res.cookie("token", null , {
+      res.cookie("token", null, {
         expires: new Date(Date.now()),
         httpOnly: true,
-       });
+      });
 
-       res.status(201).json({
+      res.status(201).json({
         success: true,
-        message: "Log out Successful!"
-       })
-    } catch (error) {
-      
-    }
+        message: "Log out Successful!",
+      });
+    } catch (error) {}
   })
-)
+);
 
 module.exports = router;

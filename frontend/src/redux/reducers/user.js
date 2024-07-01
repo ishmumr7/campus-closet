@@ -1,4 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const initialState = {
   loading: true,
@@ -31,6 +32,22 @@ export const userReducer = createReducer(initialState, (builder) => {
         isSeller: false,
       };
     })
+
+    // Update user
+    .addCase('updateUserInfoRequest', (state) => {
+      state.loading = true;
+      state.error = null; // Reset error state on request
+    })
+    .addCase('updateUserInfoSuccess', (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+      state.error = null; // Reset error state on success
+    })
+    .addCase('updateUserInfoFailed', (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+
     .addCase("clearErrors", (state) => {
       return {
         ...state,
@@ -38,22 +55,3 @@ export const userReducer = createReducer(initialState, (builder) => {
       };
     });
 });
-
-// export const userReducer = createReducer(initialState, {
-//   LoadUserRequest: (state) => {
-//     state.loading = true;
-//   },
-//   LoadUserSuccess: (state, action) => {
-//     state.isAuthenticated = true;
-//     state.loading = false;
-//     state.user = action.payload;
-//   },
-//   LoadUserFail: (state, action) => {
-//     state.loading = false;
-//     state.error = action.payload;
-//     state.isAuthenticated = false;
-//   },
-//   clearErrors: (state) => {
-//     state.error = null;
-//   },
-// });
