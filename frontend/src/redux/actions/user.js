@@ -57,3 +57,38 @@ export const updateUserInformation =
       });
     }
   };
+
+// update user address
+export const updateUserAddress =
+  (city, address1, address2, postCode, addressType) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "updateUserAddressRequest",
+      });
+
+      const { data } = await axios.put(
+        `${server}/user/update-user-addresses`,
+        {
+          city,
+          address1,
+          address2,
+          postCode,
+          addressType,
+        },
+        { withCredentials: true }
+      );
+
+      dispatch({
+        type: "updateUserAddressSuccess",
+        payload: {
+          successMessage: "User address updated succesfully!",
+          user: data.user,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: "updateUserAddressFailed",
+        payload: error.response.data.message,
+      });
+    }
+  };
