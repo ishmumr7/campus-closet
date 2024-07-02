@@ -11,6 +11,8 @@ import {
 	useStripe,
 } from "@stripe/react-stripe-js";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { server } from "../../server";
 
 const Payment = () => {
 	const [orderData, setOrderData] = useState([]);
@@ -25,88 +27,95 @@ const Payment = () => {
 		setOrderData(orderData);
 	}, []);
 
-  const createOrder = (data, actions) => {
-    return actions.order
-      .create({
-        purchase_units: [
-          {
-            description: "Sunflower",
-            amount: {
-              currency_code: "USD",
-              value: orderData?.totalPrice,
-            },
-          },
-        ],
-        // not needed if a shipping address is actually needed
-        application_context: {
-          shipping_preference: "NO_SHIPPING",
-        },
-      })
-      .then((orderID) => {
-        return orderID;
-      });
-  };
+	const createOrder = (data, actions) => {
+		return actions.order
+			.create({
+				purchase_units: [
+					{
+						description: "Sunflower",
+						amount: {
+							currency_code: "USD",
+							value: orderData?.totalPrice,
+						},
+					},
+				],
+				// not needed if a shipping address is actually needed
+				application_context: {
+					shipping_preference: "NO_SHIPPING",
+				},
+			})
+			.then((orderID) => {
+				return orderID;
+			});
+	};
 
-  const onApprove = async(data, actions) => {};
+	const order = {
+		cart: orderData?.cart,
+		shippingAddress: orderData?.shippingAddress,
+		user: user && user,
+		totalPrice: orderData?.totalPrice,
+	};
 
-  const paypalPaymentHandler = async (paymentInfo) => {};
+	const onApprove = async (data, actions) => {};
 
-  const paymentData = {
-    amount: Math.round(orderData?.totalPrice * 100),
-  };
+	const paypalPaymentHandler = async (paymentInfo) => {};
 
-  const paymentHandler = async (e) => {
-    e.preventDefault();
-    // try {
-    //   const config = {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   };
+	const paymentData = {
+		amount: Math.round(orderData?.totalPrice * 100),
+	};
 
-    //   const { data } = await axios.post(
-    //     `${server}/payment/process`,
-    //     paymentData,
-    //     config
-    //   );
+	const paymentHandler = async (e) => {
+		e.preventDefault();
+		try {
+			const config = {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			};
 
-    //   const client_secret = data.client_secret;
+			const { data } = await axios.post(
+				`${server}/payment/process`,
+				paymentData,
+				config
+			);
 
-    //   if (!stripe || !elements) return;
-    //   const result = await stripe.confirmCardPayment(client_secret, {
-    //     payment_method: {
-    //       card: elements.getElement(CardNumberElement),
-    //     },
-    //   });
+			const client_secret = data.client_secret;
 
-    //   if (result.error) {
-    //     toast.error(result.error.message);
-    //   } else {
-    //     if (result.paymentIntent.status === "succeeded") {
-    //       order.paymnentInfo = {
-    //         id: result.paymentIntent.id,
-    //         status: result.paymentIntent.status,
-    //         type: "Credit Card",
-    //       };
+			if (!stripe || !elements) return;
+			const result = await stripe.confirmCardPayment(client_secret, {
+				payment_method: {
+					card: elements.getElement(CardNumberElement),
+				},
+			});
 
-    //       await axios
-    //         .post(`${server}/order/create-order`, order, config)
-    //         .then((res) => {
-    //           setOpen(false);
-    //           navigate("/order/success");
-    //           toast.success("Order successful!");
-    //           localStorage.setItem("cartItems", JSON.stringify([]));
-    //           localStorage.setItem("latestOrder", JSON.stringify([]));
-    //           window.location.reload();
-    //         });
-    //     }
-    //   }
-    // } catch (error) {
-    //   toast.error(error);
-    // }
-  };
+			if (result.error) {
+				toast.error(result.error.message);
+			} else {
+				if (result.paymentIntent.status === "succeeded") {
+					order.paymnentInfo = {
+						id: result.paymentIntent.id,
+						status: result.paymentIntent.status,
+						type: "Credit Card",
+					};
 
-  const cashOnDeliveryHandler = async (e) => {}
+					await axios
+						.post(`${server}/order/create-order`, order, config)
+						.then((res) => {
+							setOpen(false);
+							navigate("/order/success");
+							toast.success("Order successful!");
+							localStorage.setItem("cartItems", JSON.stringify([]));
+							localStorage.setItem("latestOrder", JSON.stringify([]));
+							window.location.reload();
+						});
+				}
+			}
+		} catch (error) {
+			toast.error(error);
+		}
+	};
+
+	const cashOnDeliveryHandler = async (e) => {};
 
 	return (
 		<div className="w-full flex flex-col items-center py-8">

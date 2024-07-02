@@ -11,21 +11,23 @@ import ProfilePage from "./../pages/ProfilePage";
 import CheckoutPage from "./../pages/CheckoutPage";
 import PaymentPage from "./../pages/PaymentPage";
 import SellerCreatePage from "./../pages/SellerCreatePage";
-import SellerPreviewPage from "./../pages/SellerPreviewPage.jsx";
+import SellerPreviewPage from "./../pages/SellerPreviewPage";
+import OrderSuccessPage from "../pages/OrderSuccessPage";
 
 export {
-  LoginPage,
-  SignUpPage,
-  ActivationPage,
-  HomePage,
-  ProductPage,
-  ProductDetailsPage,
-  BestSellingPage,
-  EventsPage,
-  FAQPage,
-  CheckoutPage,
-  ProfilePage,
-  SellerCreatePage,
-  SellerPreviewPage,
-  PaymentPage,
+	LoginPage,
+	SignUpPage,
+	ActivationPage,
+	HomePage,
+	ProductPage,
+	ProductDetailsPage,
+	BestSellingPage,
+	EventsPage,
+	FAQPage,
+	CheckoutPage,
+	ProfilePage,
+	SellerCreatePage,
+	SellerPreviewPage,
+	PaymentPage,
+	OrderSuccessPage,
 };

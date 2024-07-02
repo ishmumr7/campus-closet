@@ -303,7 +303,7 @@ const ShippingInfo = ({
 											setCity(item.city);
 										}}
 									/>
-									<h2 className="text-lg font-medium">{item.addressType}</h2>
+									<h2 className="text-lg font-medium w-full">{item.addressType}</h2>
 								</label>
 							</div>
 						))}
