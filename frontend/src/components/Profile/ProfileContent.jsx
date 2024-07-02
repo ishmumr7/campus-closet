@@ -654,7 +654,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Zip Code</label>
+                    <label className="block pb-2">Post Code</label>
                     <select
                       className="w-[95%] border h-[40px] rounded-[5px]"
                       required
