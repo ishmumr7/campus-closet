@@ -182,31 +182,7 @@ const PaymentInfo = ({
 										value={user && user.name}
 									/>
 								</div>
-								<div className="w-[50%]">
-									<label className="block pb-2">Exp Date</label>
-									<CardExpiryElement
-										className={`${styles.input}`}
-										options={{
-											style: {
-												base: {
-													fontSize: "19px",
-													lineHeight: 1.5,
-													color: "#444",
-												},
-												empty: {
-													color: "#3a120a",
-													backgroundColor: "transparent",
-													"::placeholder": {
-														color: "#444",
-													},
-												},
-											},
-										}}
-									/>
-								</div>
-							</div>
 
-							<div className="w-full flex pb-3">
 								<div className="w-[50%]">
 									<label className="block pb-2">Card Number</label>
 									<CardNumberElement
@@ -229,6 +205,36 @@ const PaymentInfo = ({
 										}}
 									/>
 								</div>
+								
+								
+							</div>
+
+							{/* Card Number */}
+							<div className="w-full flex pb-3">
+								{/* Card Exp */}
+								<div className="w-[50%]">
+									<label className="block pb-2">Exp Date</label>
+									<CardExpiryElement
+										className={`${styles.input}`}
+										options={{
+											style: {
+												base: {
+													fontSize: "19px",
+													lineHeight: 1.5,
+													color: "#444",
+												},
+												empty: {
+													color: "#3a120a",
+													backgroundColor: "transparent",
+													"::placeholder": {
+														color: "#444",
+													},
+												},
+											},
+										}}
+									/>
+								</div>
+								
 								<div className="w-[50%]">
 									<label className="block pb-2">CVV</label>
 									<CardCvcElement
