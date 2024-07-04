@@ -20,6 +20,7 @@ import { RxCross1 } from "react-icons/rx";
 import { johorCities } from "../../static/data";
 import axios from "axios";
 import { server } from "../../server";
+import { getAllOrdersOfUser } from "../../redux/actions/order";
 
 const ProfileContent = ({ active }) => {
   const { user, error, successMessage } = useSelector((state) => state.user);
@@ -198,18 +199,13 @@ const ProfileContent = ({ active }) => {
 };
 
 const AllOrders = () => {
-  const orders = [
-    {
-      _id: "937rgh305wT#%HGkjds^d&d",
-      orderItems: [
-        {
-          name: "iPhone 14 Pro Max",
-        },
-      ],
-      totalPrice: 120,
-      orderStatus: "Processing",
-    },
-  ];
+  const { user } = useSelector((state) => state.user);
+  const { orders } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllOrdersOfUser(user._id));
+  }, []);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -265,9 +261,9 @@ const AllOrders = () => {
     orders.forEach((item) => {
       rows.push({
         id: item._id,
-        itemsQty: item.orderItems.length,
-        total: "RM " + orders.totalPrice,
-        status: item.orderStatus,
+        itemsQty: item.cart.length,
+        total: "RM " + item.totalPrice,
+        status: item.status,
       });
     });
 
