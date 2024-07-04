@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Login from "../components/Login/Login";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Layout/Header";
 
 const LoginPage = () => {
   const { isAuthenticated, isSeller, user, loading } = useSelector((state) => state.user);
@@ -18,6 +19,7 @@ const LoginPage = () => {
 
   return (
     <div>
+      <Header />
       <Login />
     </div>
   );
