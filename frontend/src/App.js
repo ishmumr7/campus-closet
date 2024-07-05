@@ -24,6 +24,7 @@ import {
 	SellerHomePage,
 	SellerDashboardPage,
 	SellerOrdersPage,
+	SellerOrdersDetailsPage,
 	SellerCreateProductPage,
 	SellerProductsPage,
 	SellerCreateEventPage,
@@ -142,6 +143,14 @@ const App = () => {
 					element={
 						<SellerProtectedRoute>
 							<SellerOrdersPage />
+						</SellerProtectedRoute>
+					}
+				/>
+				<Route
+					path="/order/:id"
+					element={
+						<SellerProtectedRoute>
+							<SellerOrdersDetailsPage />
 						</SellerProtectedRoute>
 					}
 				/>
