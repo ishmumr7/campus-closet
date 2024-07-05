@@ -28,6 +28,28 @@ export const orderReducer = createReducer(initialState, (builder) => {
       };
     })
 
+    // Get all orders of a seller
+    .addCase('getAllOrdersShopRequest', (state) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    })
+    .addCase('getAllOrdersShopSuccess', (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        orders: action.payload,
+      };
+    })
+    .addCase('getAllOrdersShopFailed', (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    })
+
     // Clear Errors
     .addCase('clearErrors', (state) => {
       return {
