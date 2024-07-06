@@ -39,20 +39,44 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  withdrawMethod: {
+    type: Object,
+  },
+  availableBalance: {
+    type: Number,
+    default: 0,
+  },
+  transections: [
+    {
+      amount: {
+        type: Number,
+        required: true,
+      },
+      status: {
+        type: String,
+        default: "Processing",
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now(),
+      },
+      updatedAt: {
+        type: Date,
+      },
+    },
+  ],
   role: {
     type: String,
     default: "user",
   },
-  // avatar: {
-  //   public_id: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   url: {
-  //     type: String,
-  //     required: true,
-  //   },
-  // },
+  avatar: {
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
