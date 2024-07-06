@@ -136,7 +136,7 @@ const CartItem = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
           alt=""
           className=" h-[80px] w-[80px] ml-2 mr-2 rounded-[5px] "
         />
-        <div className="pl-[5px]">
+        <div className="pl-[5px] w-[200px]">
           <h1>{data.name}</h1>
           <h4 className=" font-[400] text-[17px] text-[#d02222] font-Roboto ">
             RM {totalPrice}

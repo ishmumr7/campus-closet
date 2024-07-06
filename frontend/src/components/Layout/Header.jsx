@@ -19,7 +19,7 @@ import { RxCross1 } from "react-icons/rx";
 import { backend_url } from "../../server";
 
 const Header = ({ activeHeading }) => {
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user, isSeller } = useSelector((state) => state.user);
   const { allProducts } = useSelector((state) => state.products);
   const { cart } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -126,7 +126,7 @@ const Header = ({ activeHeading }) => {
           <div className={`${styles.button} `}>
             <Link to="/seller-create">
               <h1 className="text-[#FFF] flex items-center">
-                Start selling <IoIosArrowForward className="ml-1" />{" "}
+              {isSeller ? "Dashboard" : "Become Seller"}{" "} <IoIosArrowForward className="ml-1" />{" "}
               </h1>
             </Link>
           </div>
@@ -338,7 +338,7 @@ const Header = ({ activeHeading }) => {
               <div className={`${styles.button} ml-4 !rounded-[4px]`}>
                 <Link to="/seller-create">
                   <h1 className="text-[#fff] flex items-center">
-                    Become Seller <IoIosArrowForward className="ml-1" />
+                  {isSeller ? "Go Dashboard" : "Become Seller"}<IoIosArrowForward className="ml-1" />
                   </h1>
                 </Link>
               </div>

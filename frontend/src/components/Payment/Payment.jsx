@@ -182,7 +182,7 @@ const PaymentInfo = ({
 										value={user && user.name}
 									/>
 								</div>
-
+								{/* Card Number */}
 								<div className="w-[50%]">
 									<label className="block pb-2">Card Number</label>
 									<CardNumberElement
@@ -205,11 +205,8 @@ const PaymentInfo = ({
 										}}
 									/>
 								</div>
-								
-								
 							</div>
 
-							{/* Card Number */}
 							<div className="w-full flex pb-3">
 								{/* Card Exp */}
 								<div className="w-[50%]">
@@ -234,7 +231,7 @@ const PaymentInfo = ({
 										}}
 									/>
 								</div>
-								
+
 								<div className="w-[50%]">
 									<label className="block pb-2">CVV</label>
 									<CardCvcElement

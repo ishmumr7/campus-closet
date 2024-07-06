@@ -17,12 +17,15 @@ import {
   OrderSuccessPage,
 	PaymentPage,
 	ProfilePage,
+	OrderDetailsPage,
 	SellerCreatePage,
 	SellerPreviewPage,
 } from "./routes/Routes.js";
 import {
 	SellerHomePage,
 	SellerDashboardPage,
+	SellerOrdersPage,
+	SellerOrdersDetailsPage,
 	SellerCreateProductPage,
 	SellerProductsPage,
 	SellerCreateEventPage,
@@ -109,6 +112,14 @@ const App = () => {
 						</ProtectedRoute>
 					}
 				/>
+				<Route
+					path="/user/order/:id"
+					element={
+						<ProtectedRoute>
+							<OrderDetailsPage />
+						</ProtectedRoute>
+					}
+				/>
 				<Route path="/seller/preview/:id" element={<SellerPreviewPage />} />
 
 				{/* SELLER */}
@@ -133,6 +144,22 @@ const App = () => {
 					element={
 						<SellerProtectedRoute>
 							<SellerDashboardPage />
+						</SellerProtectedRoute>
+					}
+				/>
+				<Route
+					path="/dashboard-orders"
+					element={
+						<SellerProtectedRoute>
+							<SellerOrdersPage />
+						</SellerProtectedRoute>
+					}
+				/>
+				<Route
+					path="/order/:id"
+					element={
+						<SellerProtectedRoute>
+							<SellerOrdersDetailsPage />
 						</SellerProtectedRoute>
 					}
 				/>
