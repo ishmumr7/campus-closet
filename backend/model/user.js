@@ -39,6 +39,9 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  description: {
+    type: String,
+  },
   withdrawMethod: {
     type: Object,
   },
@@ -70,12 +73,7 @@ const userSchema = new mongoose.Schema({
     default: "user",
   },
   avatar: {
-    public_id: {
-      type: String,
-    },
-    url: {
-      type: String,
-    },
+    type: String,
   },
   createdAt: {
     type: Date,

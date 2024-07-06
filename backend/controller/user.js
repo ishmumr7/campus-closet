@@ -3,6 +3,7 @@ const path = require("path");
 const User = require("./../model/user");
 const router = express.Router();
 const { upload } = require("../multer");
+const fs = require("fs");
 const ErrorHandler = require("../utils/ErrorHandler");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
@@ -203,6 +204,44 @@ router.put(
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// Update avatar
+router.put(
+  "/update-avatar",
+  isAuthenticated,
+  upload.single("image"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const userExists = await User.findById(req.user._id);
+
+      if (userExists.avatar) {
+        const avatarPath = `uploads/${userExists.avatar}`;
+        if (fs.existsSync(avatarPath)) {
+          fs.unlinkSync(avatarPath);
+        }
+      }
+
+      const fileUrl = req.file.filename;
+
+      const user = await User.findByIdAndUpdate(
+        req.user._id,
+        { avatar: fileUrl },
+        { new: true, useFindAndModify: false }
+      );
+
+      res.status(200).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
     }
   })
 );

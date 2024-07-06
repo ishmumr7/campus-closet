@@ -33,6 +33,7 @@ import {
 	SellerEventsPage,
 	SellerCouponsPage,
 	SellerRefundsPage,
+	SellerSettingsPage,
 } from "./routes/SellerRoutes.js";
 import ProtectedRoute from "./routes/ProtectedRoute.js";
 import "./App.css";
@@ -218,6 +219,14 @@ const App = () => {
 					element={
 						<SellerProtectedRoute>
 							<SellerRefundsPage />
+						</SellerProtectedRoute>
+					}
+				/>
+				<Route
+					path="/settings"
+					element={
+						<SellerProtectedRoute>
+							<SellerSettingsPage />
 						</SellerProtectedRoute>
 					}
 				/>

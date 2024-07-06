@@ -37,26 +37,32 @@ router.post(
   })
 );
 
-// // load seller
-// router.get(
-//   "/getSeller",
-//   isAuthenticated,
-//   catchAsyncErrors(async (req, res, next) => {
-//     try {
-//       const seller = await Seller.findById(req.seller._id);
+// Update seller info (description only)
+router.put(
+  "/update-seller-info",
+  isSeller,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { description } = req.body;
 
-//       if (!seller) {
-//         return next(new ErrorHandler("User doesn't exists", 400));
-//       }
+      const user = await User.findById(req.user._id);
 
-//       res.status(200).json({
-//         success: true,
-//         seller,
-//       });
-//     } catch (error) {
-//       return next(new ErrorHandler(error.message, 500));
-//     }
-//   })
-// );
+      if (!user) {
+        return next(new ErrorHandler("User not found", 400));
+      }
+
+      user.description = description || user.description;
+
+      await user.save();
+
+      res.status(201).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
 
 module.exports = router;
