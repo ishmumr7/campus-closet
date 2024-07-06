@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getAllProductsSeller } from "../../redux/actions/product";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import Loader from "../Layout/Loader";
-import { DataGrid } from "@mui/x-data-grid";
 
 const SellerProducts = () => {
   const { products, isLoading } = useSelector((state) => state.products);

@@ -7,6 +7,7 @@ import SellerEventsPage from '../pages/Seller/SellerEventsPage';
 import SellerCouponsPage from '../pages/Seller/SellerCouponsPage';
 import SellerOrdersPage from '../pages/Seller/SellerOrdersPage';
 import SellerOrdersDetailsPage from '../pages/Seller/SellerOrdersDetailsPage';
+import SellerRefundsPage from '../pages/Seller/SellerRefundsPage';
 
 export {
   SellerHomePage,
@@ -17,5 +18,6 @@ export {
   SellerProductsPage,
   SellerCreateEventPage,
   SellerEventsPage,
-  SellerCouponsPage
+  SellerCouponsPage,
+  SellerRefundsPage,
 }

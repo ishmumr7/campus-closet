@@ -41,7 +41,23 @@ const OrderDetails = () => {
 			});
 	};
 
-	const refundOrderUpdateHandler = async (e) => {};
+	const refundOrderUpdateHandler = async (e) => {
+		await axios
+			.put(
+				`${server}/order/order-refund-success/${id}`,
+				{
+					status,
+				},
+				{ withCredentials: true }
+			)
+			.then((res) => {
+				toast.success("Order updated!");
+				dispatch(getAllOrdersOfShop(user._id));
+			})
+			.catch((error) => {
+				toast.error(error.response.data.message);
+			});
+	};
 
 	return (
 		<div className={`py-4 min-h-screen ${styles.section}`}>
