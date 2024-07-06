@@ -8,7 +8,8 @@ import EventsPage from "./../pages/EventsPage";
 import FAQPage from "./../pages/FAQPage";
 import ProductDetailsPage from "./../pages/ProductDetailsPage";
 import ProfilePage from "./../pages/ProfilePage";
-import 	OrderDetailsPage from "../pages/OrderDetailsPage";
+import OrderDetailsPage from "../pages/OrderDetailsPage";
+import TrackOrderPage from "../pages/TrackOrderPage";
 import CheckoutPage from "./../pages/CheckoutPage";
 import PaymentPage from "./../pages/PaymentPage";
 import SellerCreatePage from "./../pages/SellerCreatePage";
@@ -28,6 +29,7 @@ export {
 	CheckoutPage,
 	ProfilePage,
 	OrderDetailsPage,
+	TrackOrderPage,
 	SellerCreatePage,
 	SellerPreviewPage,
 	PaymentPage,

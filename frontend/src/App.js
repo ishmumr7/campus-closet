@@ -18,6 +18,7 @@ import {
 	PaymentPage,
 	ProfilePage,
 	OrderDetailsPage,
+	TrackOrderPage,
 	SellerCreatePage,
 	SellerPreviewPage,
 } from "./routes/Routes.js";
@@ -117,6 +118,14 @@ const App = () => {
 					element={
 						<ProtectedRoute>
 							<OrderDetailsPage />
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="/user/track/order/:id"
+					element={
+						<ProtectedRoute>
+							<TrackOrderPage />
 						</ProtectedRoute>
 					}
 				/>
