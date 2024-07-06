@@ -4,6 +4,7 @@ import SellerCreateProductPage from '../pages/Seller/SellerCreateProductPage';
 import SellerProductsPage from '../pages/Seller/SellerProductsPage';
 import SellerCreateEventPage from '../pages/Seller/SellerCreateEventPage';
 import SellerEventsPage from '../pages/Seller/SellerEventsPage';
+import SellerWithdrawMoneyPage from '../pages/Seller/SellerWithdrawMoneyPage';
 import SellerCouponsPage from '../pages/Seller/SellerCouponsPage';
 import SellerOrdersPage from '../pages/Seller/SellerOrdersPage';
 import SellerOrdersDetailsPage from '../pages/Seller/SellerOrdersDetailsPage';
@@ -19,6 +20,7 @@ export {
   SellerProductsPage,
   SellerCreateEventPage,
   SellerEventsPage,
+  SellerWithdrawMoneyPage,
   SellerCouponsPage,
   SellerRefundsPage,
   SellerSettingsPage,

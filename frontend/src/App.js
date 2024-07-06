@@ -31,6 +31,7 @@ import {
 	SellerProductsPage,
 	SellerCreateEventPage,
 	SellerEventsPage,
+	SellerWithdrawMoneyPage,
 	SellerCouponsPage,
 	SellerRefundsPage,
 	SellerSettingsPage,
@@ -206,6 +207,14 @@ const App = () => {
 						</SellerProtectedRoute>
 					}
 				/>
+				<Route
+          path="/dashboard-withdraw-money"
+          element={
+            <SellerProtectedRoute>
+              <SellerWithdrawMoneyPage />
+            </SellerProtectedRoute>
+          }
+        />
 				<Route
 					path="/dashboard-coupons"
 					element={
