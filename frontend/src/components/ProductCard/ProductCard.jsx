@@ -19,6 +19,7 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "../../redux/actions/wishlist.js";
+import Ratings from "../Products/Ratings.jsx";
 
 const ProductCard = ({ data, isEvent }) => {
   const [click, setClick] = useState(false);
@@ -82,31 +83,7 @@ const ProductCard = ({ data, isEvent }) => {
           {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
         </h4>
         <div className="flex">
-          <AiFillStar
-            className="mr-2 cursor-pointer"
-            color="#F6BA00"
-            size={20}
-          />
-          <AiFillStar
-            className="mr-2 cursor-pointer"
-            color="#F6BA00"
-            size={20}
-          />
-          <AiFillStar
-            className="mr-2 cursor-pointer"
-            color="#F6BA00"
-            size={20}
-          />
-          <AiFillStar
-            className="mr-2 cursor-pointer"
-            color="#F6BA00"
-            size={20}
-          />
-          <AiOutlineStar
-            className="mr-2 cursor-pointer"
-            color="#F6BA00"
-            size={20}
-          />
+          <Ratings rating={data?.ratings} />
         </div>
         <div className="py-2 flex items-center justify-between">
           <div className="flex">
