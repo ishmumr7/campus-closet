@@ -89,6 +89,7 @@ router.get(
   })
 );
 
+// Update order status
 router.put(
   "/update-order-status/:id",
   isSeller,
@@ -131,7 +132,7 @@ router.put(
       }
 
       async function updateSellerInfo(amount) {
-        const seller = await Shop.findById(req.seller.id);
+        const seller = await User.findById(req.user._id);
         
         seller.availableBalance = amount;
 
