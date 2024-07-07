@@ -11,7 +11,7 @@ import {
 	AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { getAllProductsSeller } from "../../redux/actions/product";
-import { backend_url } from "../../server";
+import { backend_url, server } from "../../server";
 import { addTocart } from "../../redux/actions/cart";
 import {
 	addToWishlist,
@@ -23,7 +23,8 @@ const ProductDetails = ({ data }) => {
 	const [count, setCount] = useState(1);
 	const [click, setClick] = useState(false);
 	const [select, setSelect] = useState(0);
-  const { products } = useSelector((state) => state.products);
+	const { user, isAuthenticated } = useSelector((state) => state.user);
+	const { products } = useSelector((state) => state.products);
 	const { cart } = useSelector((state) => state.cart);
 	const { wishlist } = useSelector((state) => state.wishlist);
 	const navigate = useNavigate();
@@ -76,13 +77,31 @@ const ProductDetails = ({ data }) => {
 		dispatch(addToWishlist(data));
 	};
 
-	const handleMessageSubmit = () => {
-		navigate("/inbox?coversation=53ktjtnef9g83ht93756yhwf46");
+	const handleMessageSubmit = async () => {
+		if (isAuthenticated) {
+			const groupTitle = data._id + user._id;
+			const userId = user._id;
+			const sellerId = data.sellerId;
+			await axios
+				.post(`${server}/conversation/create-new-conversation`, {
+					groupTitle,
+					userId,
+					sellerId,
+				})
+				.then((res) => {
+					navigate(`/conversation/${res.data.conversation._id}`);
+				})
+				.catch((error) => {
+					toast.error(error.response.data.message);
+				});
+		} else {
+			toast.error("Please log in to first!");
+		}
 	};
 
-  const totalReviewsLength =
-    products &&
-    products.reduce((acc, product) => acc + product.reviews.length, 0);
+	const totalReviewsLength =
+		products &&
+		products.reduce((acc, product) => acc + product.reviews.length, 0);
 
 	return (
 		<div className=" bg-white pb-10">
@@ -347,7 +366,8 @@ const ProductDetailsInfo = ({ data, totalReviewsLength }) => {
 							</h5>
 
 							<h5 className="font-[600] pt-3">
-								Total Reviews: <span className="font-[500]">{totalReviewsLength}</span>
+								Total Reviews:{" "}
+								<span className="font-[500]">{totalReviewsLength}</span>
 							</h5>
 							<Link to="/">
 								<div
