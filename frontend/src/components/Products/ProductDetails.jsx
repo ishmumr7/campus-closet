@@ -191,7 +191,7 @@ const ProductDetails = ({ data }) => {
 											</h3>
 										</Link>
 										<h5 className="pb-3 text-[15px]">
-											{data.reviews.length !== 0
+											{data?.reviews?.length !== 0
 												? data.ratings + "/5 Rating"
 												: "Not Rated"}
 										</h5>
@@ -284,7 +284,7 @@ const ProductDetailsInfo = ({ data, totalReviewsLength }) => {
 			{active === 2 ? (
 				<div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
 					{data &&
-						data.reviews.map((item, index) => (
+						data?.reviews?.map((item, index) => (
 							<div className="w-full flex my-2">
 								<img
 									src="https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
@@ -302,7 +302,7 @@ const ProductDetailsInfo = ({ data, totalReviewsLength }) => {
 						))}
 
 					<div className="w-full flex justify-center">
-						{data && data.reviews.length === 0 && (
+						{data && data.reviews?.length === 0 && (
 							<h5>No Reviews have for this product!</h5>
 						)}
 					</div>

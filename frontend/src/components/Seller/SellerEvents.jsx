@@ -61,7 +61,7 @@ const SellerEvents = () => {
         const event_name = params.row.name.replace(/\s+/g, '-');
         return (
           <>
-            <Link to={`/event/${event_name}`}>
+            <Link to={`/product/${params.id}?isEvent=true`}>
               <Button>
                 <AiOutlineEye size={20} />
               </Button>
