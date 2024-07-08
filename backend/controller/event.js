@@ -6,7 +6,7 @@ const User = require("../model/user");
 const Event = require("../model/event");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
-const { isSeller, isAdmin } = require("../middleware/auth");
+const { isAuthenticated, isSeller, isAdmin } = require("../middleware/auth");
 
 // Create Event
 router.post(
