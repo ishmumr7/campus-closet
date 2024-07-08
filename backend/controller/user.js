@@ -89,7 +89,6 @@ router.post(
           email,
           password,
           phoneNumber,
-          addresses,
         });
 
         // Send token
