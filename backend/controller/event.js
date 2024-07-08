@@ -6,7 +6,7 @@ const User = require("../model/user");
 const Event = require("../model/event");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
-const { isSeller } = require("../middleware/auth");
+const { isSeller, isAdmin } = require("../middleware/auth");
 
 // Create Event
 router.post(
@@ -103,6 +103,26 @@ router.delete(
       });
     } catch (error) {
       return next(new ErrorHandler(error, 400));
+    }
+  })
+);
+
+// all events --- for admin
+router.get(
+  "/admin-all-events",
+  isAuthenticated,
+  isAdmin("Admin"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const events = await Event.find().sort({
+        createdAt: -1,
+      });
+      res.status(201).json({
+        success: true,
+        events,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
     }
   })
 );
