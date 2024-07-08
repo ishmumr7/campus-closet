@@ -2,7 +2,7 @@ const Messages = require("../model/messages");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const express = require("express");
-const cloudinary = require("cloudinary");
+const { upload } = require("../multer");
 const router = express.Router();
 
 // create new message
@@ -42,6 +42,25 @@ router.post(
 			return next(new ErrorHandler(error.message), 500);
 		}
 	})
+);
+
+// get all messages with conversation id
+router.get(
+  "/get-all-messages/:id",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const messages = await Messages.find({
+        conversationId: req.params.id,
+      });
+
+      res.status(201).json({
+        success: true,
+        messages,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message), 500);
+    }
+  })
 );
 
 module.exports = router;

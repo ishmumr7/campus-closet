@@ -311,6 +311,7 @@ router.delete(
   })
 );
 
+//Update password
 router.put(
   "/update-user-password",
   isAuthenticated,
@@ -361,6 +362,23 @@ router.get(
         message: "Log out Successful!",
       });
     } catch (error) {}
+  })
+);
+
+// find user infoormation with the userId
+router.get(
+  "/user-info/:id",
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const user = await User.findById(req.params.id);
+
+      res.status(201).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
   })
 );
 
