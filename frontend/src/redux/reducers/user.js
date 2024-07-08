@@ -86,6 +86,50 @@ export const userReducer = createReducer(initialState, (builder) => {
       };
     })
 
+    // get all users --- admin
+    .addCase('getAllUsersRequest', (state) => {
+      return {
+        ...state,
+        usersLoading: true,
+      };
+    })
+    .addCase('getAllUsersSuccess', (state, action) => {
+      return {
+        ...state,
+        usersLoading: false,
+        users: action.payload,
+      };
+    })
+    .addCase('getAllUsersFailed', (state, action) => {
+      return {
+        ...state,
+        usersLoading: false,
+        error: action.payload,
+      };
+    })
+
+    // get all sellers --- admin
+    .addCase('getAllSellersRequest', (state) => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    })
+    .addCase('getAllSellersSuccess', (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        sellers: action.payload,
+      };
+    })
+    .addCase('getAllSellersFailed', (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    })
+
     //Clear messages
     .addCase("clearMessages", (state) => {
       return {

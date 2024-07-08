@@ -38,6 +38,15 @@ import {
 	SellerRefundsPage,
 	SellerSettingsPage,
 } from "./routes/SellerRoutes.js";
+import {
+  AdminDashboardPage,
+  AdminDashboardUsers,
+  AdminDashboardSellers,
+  AdminDashboardOrders,
+  AdminDashboardProducts,
+  AdminDashboardEvents,
+  AdminDashboardWithdraw
+} from "./routes/AdminRoutes.js";
 import ProtectedRoute from "./routes/ProtectedRoute.js";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -49,6 +58,7 @@ import { getAllProducts } from "./redux/actions/product.js";
 import { getAllEvents } from "./redux/actions/event.js";
 import axios from "axios";
 import { server } from "./server.js";
+import AdminProtectedRoute from "./routes/AdminProtectedRoute.js";
 
 const App = () => {
 	const [stripeApiKey, setStripeApiKey] = useState("");
@@ -257,6 +267,48 @@ const App = () => {
 						</SellerProtectedRoute>
 					}
 				/>
+
+				{/* ADMIN */}
+				<Route
+          path="/admin/dashboard"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboardPage />
+            </AdminProtectedRoute>
+          }
+        />
+				<Route
+          path="/admin-users"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboardUsers />
+            </AdminProtectedRoute>
+          }
+        />
+				<Route
+          path="/admin-orders"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboardOrders />
+            </AdminProtectedRoute>
+          }
+        />
+				<Route
+          path="/admin-products"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboardProducts />
+            </AdminProtectedRoute>
+          }
+        />
+				<Route
+          path="/admin-events"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboardEvents />
+            </AdminProtectedRoute>
+          }
+        />
 			</Routes>
 
 			<ToastContainer

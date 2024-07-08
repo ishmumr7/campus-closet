@@ -50,6 +50,28 @@ export const orderReducer = createReducer(initialState, (builder) => {
       };
     })
 
+    // get all orders for admin
+    .addCase('adminAllOrdersRequest', (state) => {
+      return {
+        ...state,
+        adminOrderLoading: true,
+      };
+    })
+    .addCase('adminAllOrdersSuccess', (state, action) => {
+      return {
+        ...state,
+        adminOrderLoading: false,
+        adminOrders: action.payload,
+      };
+    })
+    .addCase('adminAllOrdersFailed', (state, action) => {
+      return {
+        ...state,
+        adminOrderLoading: false,
+        error: action.payload,
+      };
+    })    
+
     // Clear Errors
     .addCase('clearErrors', (state) => {
       return {
