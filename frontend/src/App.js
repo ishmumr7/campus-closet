@@ -286,6 +286,14 @@ const App = () => {
           }
         />
 				<Route
+          path="/admin-sellers"
+          element={
+            <AdminProtectedRoute>
+              <AdminDashboardSellers />
+            </AdminProtectedRoute>
+          }
+        />
+				<Route
           path="/admin-orders"
           element={
             <AdminProtectedRoute>
