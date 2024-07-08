@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { backend_url, server } from "../../server";
+import { backend_url, server } from "../server";
 import { useNavigate } from "react-router-dom";
 import socketIO from "socket.io-client";
 import { AiOutlineArrowDown, AiOutlineSend } from "react-icons/ai";
 import { format } from "timeago.js";
 import { TfiGallery } from "react-icons/tfi";
-import styles from "../../styles/styles";
+import styles from "../styles/styles";
 const ENDPOINT = "http://localhost:4000/";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 

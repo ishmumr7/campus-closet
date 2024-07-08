@@ -17,6 +17,7 @@ import {
   OrderSuccessPage,
 	PaymentPage,
 	ProfilePage,
+	UserInboxPage,
 	OrderDetailsPage,
 	TrackOrderPage,
 	SellerCreatePage,
@@ -114,6 +115,14 @@ const App = () => {
 					element={
 						<ProtectedRoute>
 							<ProfilePage />
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="/inbox"
+					element={
+						<ProtectedRoute>
+							<UserInboxPage />
 						</ProtectedRoute>
 					}
 				/>
