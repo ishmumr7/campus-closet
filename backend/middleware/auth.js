@@ -29,11 +29,10 @@ exports.isSeller = catchAsyncErrors(async (req, res, next) => {
   next();
 });
 
-exports.isAdmin = (...roles) => {
-  return (req,res,next) => {
-      if(!roles.includes(req.user.role)){
-          return next(new ErrorHandler(`${req.user.role} can not access this resources!`))
-      };
-      next();
-  }
-}
+exports.isAdmin = catchAsyncErrors(async (req, res, next) => {
+  const {token} = req.cookies;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+  req.user = await User.findById(decoded.id);
+
+  
+})

@@ -215,7 +215,7 @@ router.put(
 router.get(
   "/admin-all-orders",
   isAuthenticated,
-  isAdmin("Admin"),
+  isAdmin,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const orders = await Order.find().sort({
