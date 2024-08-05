@@ -35,7 +35,8 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios
+    if (password === confirmPassword) {
+      axios
       .post(`${server}/user/create-user`, {
         name,
         email,
@@ -60,6 +61,9 @@ const SignUp = () => {
       .catch((err) => {
         toast.error(err.response.data.message);
       });
+    } else {
+      toast.error("Passwords don't match!");
+    }
   };
 
   return (
